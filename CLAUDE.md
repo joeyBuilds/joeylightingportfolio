@@ -147,6 +147,34 @@ A decade of experience has taught me that great lighting isn't about the rig. It
 
 ---
 
+## January 2026 Updates
+
+### Tour Entry Spacing (Tablet/Mobile)
+- Added margin-bottom between `.tour-feature` sections for clearer visual separation
+- **Tablet (≤1100px):** 8rem spacing between tour entries
+- **Mobile (≤600px):** 6rem spacing between tour entries
+
+### Hamburger Navigation Menu
+- Added hamburger button for tablet/mobile viewports (≤1100px)
+- Compact dropdown menu (not full-screen overlay)
+- Positioned top-right, appears below nav bar
+- Features:
+  - Three-line icon animates to X when open
+  - Blurred background with subtle border
+  - Closes on link tap, outside click, or Escape key
+- Files: Hamburger button in `<nav>`, mobile menu as separate `<div class="mobile-menu">`
+
+### Favicon
+- Created custom SVG favicon based on simplified alchemy circle design
+- Design: Two concentric circles with upward-pointing triangle
+- Location: `images/favicon.svg`
+- Also set as apple-touch-icon
+
+### Additional Files Created
+- `favicon-options.html` - Preview page showing 8 favicon design options at multiple sizes (can be deleted)
+
+---
+
 ## Deployment
 Hosted on Vercel. Deploy with:
 ```bash

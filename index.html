@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Joey Troup — Concert Lighting Programmer</title>
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="apple-touch-icon" href="images/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -288,6 +290,94 @@
 
         .nav-links a:hover::after {
             width: 100%;
+        }
+
+        /* ============================================
+           HAMBURGER MENU
+           ============================================ */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 200;
+            padding: 0;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: #fff;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* Mobile Menu Dropdown */
+        .mobile-menu {
+            position: fixed;
+            top: 60px;
+            right: 1.5rem;
+            background: rgba(20, 20, 20, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            padding: 0.5rem 0;
+            z-index: 150;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .mobile-nav-links li {
+            margin: 0;
+        }
+
+        .mobile-nav-links a {
+            display: block;
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .mobile-nav-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
         }
 
         /* ============================================
@@ -926,6 +1016,10 @@
                 display: none;
             }
 
+            .hamburger {
+                display: flex;
+            }
+
             .logo {
                 font-size: 1.12rem;
             }
@@ -962,6 +1056,7 @@
             .tour-feature {
                 grid-template-columns: 1fr;
                 min-height: auto;
+                margin-bottom: 8rem;
             }
 
             .tour-feature.reverse {
@@ -1043,6 +1138,7 @@
 
             .tour-feature {
                 min-height: auto;
+                margin-bottom: 6rem;
             }
 
             .tour-title {
@@ -1160,7 +1256,21 @@
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu" id="mobile-menu">
+        <ul class="mobile-nav-links">
+            <li><a href="#work">Work</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
 
     <main>
         <!-- Hero -->
@@ -1793,6 +1903,42 @@
 
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') closeLightbox();
+        });
+
+        // ============================================
+        // HAMBURGER MENU
+        // ============================================
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        hamburger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            }
+        });
+
+        // Close menu on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            }
         });
     </script>
 </body>

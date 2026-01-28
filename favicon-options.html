@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favicon Options</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Space Grotesk', -apple-system, sans-serif;
+            background: #111;
+            color: #fff;
+            padding: 3rem;
+        }
+        h1 { margin-bottom: 1rem; font-size: 1.5rem; }
+        p { color: rgba(255,255,255,0.6); margin-bottom: 3rem; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        .option {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+        }
+        .option h3 {
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+        }
+        .previews {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .preview {
+            background: #333;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .preview.large { width: 64px; height: 64px; }
+        .preview.medium { width: 32px; height: 32px; }
+        .preview.small { width: 16px; height: 16px; }
+        .size-label {
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.4);
+            margin-top: 0.5rem;
+        }
+        svg { display: block; }
+    </style>
+</head>
+<body>
+    <h1>Favicon Options</h1>
+    <p>Here are some simple geometric options. The three sizes show how they'll look at actual favicon sizes (64px, 32px, 16px).</p>
+
+    <div class="grid">
+        <!-- Option 1: Simple Circle with JT -->
+        <div class="option">
+            <h3>1. Initials Circle</h3>
+            <div class="previews">
+                <div>
+                    <div class="preview large">
+                        <svg width="48" height="48" viewBox="0 0 48 48">
+                            <circle cx="24" cy="24" r="22" fill="#fff"/>
+                            <text x="24" y="30" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="18" font-weight="bold" fill="#000">JT</text>
+                        </svg>
+                    </div>
+                    <div class="size-label">64px</div>
+                </div>
+                <div>
+                    <div class="preview medium">
+                        <svg width="24" height="24" viewBox="0 0 48 48">
+                            <circle cx="24" cy="24" r="22" fill="#fff"/>
+                            <text x="24" y="30" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="18" font-weight="bold" fill="#000">JT</text>
+                        </svg>
+                    </div>
+                    <div class="size-label">32px</div>
+                </div>
+                <div>
+                    <div class="preview small">
+                        <svg width="16" height="16" viewBox="0 0 48 48">
+                            <circle cx="24" cy="24" r="22" fill="#fff"/>
+                            <text x="24" y="30" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="18" font-weight="bold" fill="#000">JT</text>
+                        </svg>
+                    </div>
+                    <div class="size-label">16px</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Option 2: Spotlight / Beam -->
+        <div class="option">
+            <h3>2. Spotlight Beam</h3>
+            <div class="previews">
+                <div>
+                    <div class="preview large">
+                        <svg width="48" height="48" viewBox="0 0 48 48">
+                            <circle cx="24" cy="24" r="22" fill="none" stroke="#fff" stroke-width="3"/>
+                            <polygon points="24,8 12,40 36,40" fill="#fff"/>
+                        </svg>
+                    </div>
+                    <div class="size-label">64px</div>
+                </div>
+                <div>
+                    <div class="preview medium">
+                        <svg width="24" height="24" viewBox="0 0 48 48">
+                            <circle cx="24" cy="24" r="22" fill="none" stroke="#fff" stroke-width="3"/>
+                            <polygon points="24,8 12,40 36,40" fill="#fff"/>
+                        </svg>
+                    </div>
+                    <div class="size-label">32px</div>
+                </div>
+                <div>
+                    <div class="preview small">
+                        <svg width="16" height="16" viewBox="0 0 48 48">
+                            <circle cx="24" cy="24" r="22" fill="none" stroke="#fff" stroke-width="3"/>
+                            <polygon points="24,8 12,40 36,40" fill="#fff"/>
+                        </svg>
+                    </div>
+                    <div class="size-label">16px</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Option 3: Concentric Rings -->
+        <div class="option">
+            <h3>3. Concentric Rings</h3>
+            <div class="previews">
+                <div>
+                    <div class="preview large">
+                        <svg width="48" height="48" viewBox="0 0 48 48">
+                            <circle cx="24" cy="24" r="22" fill="none" stroke="#fff" stroke-width="2.5"/>
+                            <circle cx="24" cy="24" r="14" fill="none" stroke="#fff" stroke-width="2.5"/>
+                            <circle cx="24" cy="24" r="6" fill="#fff"/>
+                        </svg>
+                    </div>
+                    <div class="size-label">64px</div>
+                </div>
+                <div>
+                    <div class="preview medium">
+                        <svg width="24" height="24" viewBox="0 0 48 48">
+                            <circle cx="24" cy="24" r="22" fill="none" stroke="#fff" stroke-width="2.5"/>
+                            <circle cx="24" cy="24" r="14" fill="none" stroke="#fff" stroke-width="2.5"/>
+                            <circle cx="24" cy="24" r="6" fill="#fff"/>
+                        </svg>
+                    </div>
+                    <div class="size-label">32px</div>
+                </div>
+                <div>
+                    <div class="preview small">
+                        <svg width="16" height="16" viewBox="0 0 48 48">
+                            <circle cx="24" cy="24" r="22" fill="none" stroke="#fff" stroke-width="2.5"/>
+                            <circle cx="24" cy="24" r="14" fill="none" stroke="#fff" stroke-width="2.5"/>
+                            <circle cx="24" cy="24" r="6" fill="#fff"/>
+                        </svg>
+                    </div>
+                    <div class="size-label">16px</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Option 4: Hexagon -->
+        <div class="option">
+            <h3>4. Hexagon</h3>
+            <div class="previews">
+                <div>
+                    <div class="preview large">
+                        <svg width="48" height="48" viewBox="0 0 48 48">
+                            <polygon points="24,2 44,14 44,34 24,46 4,34 4,14" fill="#fff"/>
+                        </svg>
+                    </div>
+                    <div class="size-label">64px</div>
+                </div>
+                <div>
+                    <div class="preview medium">
+                        <svg width="24" height="24" viewBox="0 0 48 48">
+                            <polygon points="24,2 44,14 44,34 24,46 4,34 4,14" fill="#fff"/>
+                        </svg>
+                    </div>
+                    <div class="size-label">32px</div>
+                </div>
+                <div>
+                    <div class="preview small">
+                        <svg width="16" height="16" viewBox="0 0 48 48">
+                            <polygon points="24,2 44,14 44,34 24,46 4,34 4,14" fill="#fff"/>
+                        </svg>
+                    </div>
+                    <div class="size-label">16px</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Option 5: Diamond with dot -->
+        <div class="option">
+            <h3>5. Diamond</h3>
+            <div class="previews">
+                <div>
+                    <div class="preview large">
+                        <svg width="48" height="48" viewBox="0 0 48 48">
+                            <polygon points="24,4 44,24 24,44 4,24" fill="none" stroke="#fff" stroke-width="3"/>
+                            <circle cx="24" cy="24" r="6" fill="#fff"/>
+                        </svg>
+                    </div>
+                    <div class="size-label">64px</div>
+                </div>
+                <div>
+                    <div class="preview medium">
+                        <svg width="24" height="24" viewBox="0 0 48 48">
+                            <polygon points="24,4 44,24 24,44 4,24" fill="none" stroke="#fff" stroke-width="3"/>
+                            <circle cx="24" cy="24" r="6" fill="#fff"/>
+                        </svg>
+                    </div>
+                    <div class="size-label">32px</div>
+                </div>
+                <div>
+                    <div class="preview small">
+                        <svg width="16" height="16" viewBox="0 0 48 48">
+                            <polygon points="24,4 44,24 24,44 4,24" fill="none" stroke="#fff" stroke-width="3"/>
+                            <circle cx="24" cy="24" r="6" fill="#fff"/>
+                        </svg>
+                    </div>
+                    <div class="size-label">16px</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Option 6: Simple filled circle -->
+        <div class="option">
+            <h3>6. Solid Circle</h3>
+            <div class="previews">
+                <div>
+                    <div class="preview large">
+                        <svg width="48" height="48" viewBox="0 0 48 48">
+                            <circle cx="24" cy="24" r="20" fill="#fff"/>
+                        </svg>
+                    </div>
+                    <div class="size-label">64px</div>
+                </div>
+                <div>
+                    <div class="preview medium">
+                        <svg width="24" height="24" viewBox="0 0 48 48">
+                            <circle cx="24" cy="24" r="20" fill="#fff"/>
+                        </svg>
+                    </div>
+                    <div class="size-label">32px</div>
+                </div>
+                <div>
+                    <div class="preview small">
+                        <svg width="16" height="16" viewBox="0 0 48 48">
+                            <circle cx="24" cy="24" r="20" fill="#fff"/>
+                        </svg>
+                    </div>
+                    <div class="size-label">16px</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Option 7: Crosshair / Target -->
+        <div class="option">
+            <h3>7. Crosshair</h3>
+            <div class="previews">
+                <div>
+                    <div class="preview large">
+                        <svg width="48" height="48" viewBox="0 0 48 48">
+                            <circle cx="24" cy="24" r="20" fill="none" stroke="#fff" stroke-width="3"/>
+                            <line x1="24" y1="4" x2="24" y2="18" stroke="#fff" stroke-width="3"/>
+                            <line x1="24" y1="30" x2="24" y2="44" stroke="#fff" stroke-width="3"/>
+                            <line x1="4" y1="24" x2="18" y2="24" stroke="#fff" stroke-width="3"/>
+                            <line x1="30" y1="24" x2="44" y2="24" stroke="#fff" stroke-width="3"/>
+                            <circle cx="24" cy="24" r="4" fill="#fff"/>
+                        </svg>
+                    </div>
+                    <div class="size-label">64px</div>
+                </div>
+                <div>
+                    <div class="preview medium">
+                        <svg width="24" height="24" viewBox="0 0 48 48">
+                            <circle cx="24" cy="24" r="20" fill="none" stroke="#fff" stroke-width="3"/>
+                            <line x1="24" y1="4" x2="24" y2="18" stroke="#fff" stroke-width="3"/>
+                            <line x1="24" y1="30" x2="24" y2="44" stroke="#fff" stroke-width="3"/>
+                            <line x1="4" y1="24" x2="18" y2="24" stroke="#fff" stroke-width="3"/>
+                            <line x1="30" y1="24" x2="44" y2="24" stroke="#fff" stroke-width="3"/>
+                            <circle cx="24" cy="24" r="4" fill="#fff"/>
+                        </svg>
+                    </div>
+                    <div class="size-label">32px</div>
+                </div>
+                <div>
+                    <div class="preview small">
+                        <svg width="16" height="16" viewBox="0 0 48 48">
+                            <circle cx="24" cy="24" r="20" fill="none" stroke="#fff" stroke-width="3"/>
+                            <line x1="24" y1="4" x2="24" y2="18" stroke="#fff" stroke-width="3"/>
+                            <line x1="24" y1="30" x2="24" y2="44" stroke="#fff" stroke-width="3"/>
+                            <line x1="4" y1="24" x2="18" y2="24" stroke="#fff" stroke-width="3"/>
+                            <line x1="30" y1="24" x2="44" y2="24" stroke="#fff" stroke-width="3"/>
+                            <circle cx="24" cy="24" r="4" fill="#fff"/>
+                        </svg>
+                    </div>
+                    <div class="size-label">16px</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Option 8: Simplified Alchemy Circle -->
+        <div class="option">
+            <h3>8. Simplified Alchemy</h3>
+            <div class="previews">
+                <div>
+                    <div class="preview large">
+                        <svg width="48" height="48" viewBox="0 0 48 48">
+                            <circle cx="24" cy="24" r="21" fill="none" stroke="#fff" stroke-width="2.5"/>
+                            <circle cx="24" cy="24" r="12" fill="none" stroke="#fff" stroke-width="2"/>
+                            <polygon points="24,6 38,32 10,32" fill="none" stroke="#fff" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div class="size-label">64px</div>
+                </div>
+                <div>
+                    <div class="preview medium">
+                        <svg width="24" height="24" viewBox="0 0 48 48">
+                            <circle cx="24" cy="24" r="21" fill="none" stroke="#fff" stroke-width="2.5"/>
+                            <circle cx="24" cy="24" r="12" fill="none" stroke="#fff" stroke-width="2"/>
+                            <polygon points="24,6 38,32 10,32" fill="none" stroke="#fff" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div class="size-label">32px</div>
+                </div>
+                <div>
+                    <div class="preview small">
+                        <svg width="16" height="16" viewBox="0 0 48 48">
+                            <circle cx="24" cy="24" r="21" fill="none" stroke="#fff" stroke-width="2.5"/>
+                            <circle cx="24" cy="24" r="12" fill="none" stroke="#fff" stroke-width="2"/>
+                            <polygon points="24,6 38,32 10,32" fill="none" stroke="#fff" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div class="size-label">16px</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
