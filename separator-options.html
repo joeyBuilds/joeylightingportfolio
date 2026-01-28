@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Separator Options</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: #000;
+            color: #fff;
+            padding: 2rem;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            color: rgba(255,255,255,0.9);
+        }
+
+        p.intro {
+            text-align: center;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 3rem;
+            font-size: 0.9rem;
+        }
+
+        .option {
+            margin-bottom: 4rem;
+            padding: 2rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+        }
+
+        .option-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .demo-context {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .demo-context h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .demo-context .role {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255,255,255,0.4);
+        }
+
+        /* ========== NEW: Alchemy Circle with Lines (Animated) ========== */
+        .separator-alchemy-lines {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 0;
+            gap: 1.5rem;
+        }
+
+        .separator-alchemy-lines .line {
+            width: 80px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .separator-alchemy-lines .line::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -50%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent);
+            animation: lineSweep 7s ease-in-out infinite;
+        }
+
+        .separator-alchemy-lines .line.right::before {
+            animation: lineSweepReverse 7s ease-in-out infinite;
+        }
+
+        @keyframes lineSweep {
+            0%, 100% { left: -50%; opacity: 0; }
+            15% { opacity: 1; }
+            40% { left: 60%; opacity: 0; }
+            41%, 100% { opacity: 0; }
+        }
+
+        @keyframes lineSweepReverse {
+            0%, 100% { right: -50%; left: auto; opacity: 0; }
+            15% { opacity: 1; }
+            40% { right: 60%; left: auto; opacity: 0; }
+            41%, 100% { opacity: 0; }
+        }
+
+        .separator-alchemy-lines svg {
+            width: 28px;
+            height: 28px;
+            opacity: 0.35;
+            animation: circleGlow 7s ease-in-out infinite;
+        }
+
+        @keyframes circleGlow {
+            0%, 30% { opacity: 0.35; filter: drop-shadow(0 0 0 transparent); }
+            45% { opacity: 0.6; filter: drop-shadow(0 0 8px rgba(255,255,255,0.3)); }
+            60%, 100% { opacity: 0.35; filter: drop-shadow(0 0 0 transparent); }
+        }
+
+        /* ========== VARIATION A: Spin Pulse ========== */
+        .separator-alchemy-spin svg {
+            width: 28px;
+            height: 28px;
+            opacity: 0.35;
+            animation: circleSpin 7s ease-in-out infinite;
+        }
+
+        @keyframes circleSpin {
+            0%, 35% { opacity: 0.35; transform: rotate(0deg); }
+            45% { opacity: 0.6; transform: rotate(90deg); }
+            55% { transform: rotate(90deg); }
+            65%, 100% { opacity: 0.35; transform: rotate(90deg); }
+        }
+
+        /* ========== VARIATION B: Ripple Scale ========== */
+        .separator-alchemy-ripple svg {
+            width: 28px;
+            height: 28px;
+            opacity: 0.35;
+            animation: circleRipple 7s ease-in-out infinite;
+        }
+
+        @keyframes circleRipple {
+            0%, 35% { opacity: 0.35; transform: scale(1); }
+            42% { opacity: 0.6; transform: scale(1.3); }
+            50% { opacity: 0.5; transform: scale(0.95); }
+            58% { transform: scale(1.05); }
+            65%, 100% { opacity: 0.35; transform: scale(1); }
+        }
+
+        /* ========== VARIATION C: Ring Burst ========== */
+        .separator-alchemy-burst {
+            position: relative;
+        }
+
+        .separator-alchemy-burst svg {
+            width: 28px;
+            height: 28px;
+            opacity: 0.35;
+            animation: circleGlow 7s ease-in-out infinite;
+        }
+
+        .separator-alchemy-burst .ring {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 28px;
+            height: 28px;
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 50%;
+            opacity: 0;
+            animation: ringBurst 7s ease-out infinite;
+        }
+
+        @keyframes ringBurst {
+            0%, 40% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0;
+                filter: blur(0px);
+            }
+            44% {
+                opacity: 0.6;
+                filter: blur(0px);
+            }
+            52% {
+                transform: translate(-50%, -50%) scale(1.6);
+                opacity: 0.35;
+                filter: blur(1.5px);
+            }
+            62% {
+                transform: translate(-50%, -50%) scale(2.2);
+                opacity: 0;
+                filter: blur(4px);
+            }
+            100% { opacity: 0; }
+        }
+
+        /* ========== OPTION 1: Diamond Line ========== */
+        .separator-diamond {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 0;
+            gap: 1.5rem;
+        }
+
+        .separator-diamond .line {
+            width: 80px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        }
+
+        .separator-diamond .diamond {
+            width: 8px;
+            height: 8px;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.4);
+            transform: rotate(45deg);
+        }
+
+        /* ========== OPTION 2: Triple Dots ========== */
+        .separator-dots {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 0;
+            gap: 0.75rem;
+        }
+
+        .separator-dots .dot {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+        }
+
+        .separator-dots .dot.center {
+            width: 6px;
+            height: 6px;
+            background: rgba(255,255,255,0.5);
+        }
+
+        /* ========== OPTION 3: Converging Lines ========== */
+        .separator-converge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 0;
+        }
+
+        .separator-converge svg {
+            width: 120px;
+            height: 20px;
+            opacity: 0.4;
+        }
+
+        /* ========== OPTION 4: Mini Alchemy Circle ========== */
+        .separator-alchemy {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 0;
+        }
+
+        .separator-alchemy svg {
+            width: 32px;
+            height: 32px;
+            opacity: 0.35;
+        }
+
+        /* ========== OPTION 5: Glowing Line ========== */
+        .separator-glow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 0;
+        }
+
+        .separator-glow .line {
+            width: 120px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+            box-shadow: 0 0 10px rgba(255,255,255,0.3), 0 0 20px rgba(255,255,255,0.1);
+        }
+
+        /* ========== OPTION 6: Hexagon ========== */
+        .separator-hex {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 0;
+            gap: 1rem;
+        }
+
+        .separator-hex .line {
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25));
+        }
+
+        .separator-hex .line.right {
+            background: linear-gradient(90deg, rgba(255,255,255,0.25), transparent);
+        }
+
+        .separator-hex svg {
+            width: 16px;
+            height: 16px;
+            opacity: 0.4;
+        }
+
+        /* ========== OPTION 7: Cross Lines ========== */
+        .separator-cross {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 0;
+        }
+
+        .separator-cross svg {
+            width: 24px;
+            height: 24px;
+            opacity: 0.35;
+        }
+
+        /* ========== OPTION 8: Double Diamond ========== */
+        .separator-double-diamond {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 0;
+            gap: 0.5rem;
+        }
+
+        .separator-double-diamond .diamond {
+            width: 6px;
+            height: 6px;
+            border: 1px solid rgba(255,255,255,0.35);
+            transform: rotate(45deg);
+        }
+
+        .separator-double-diamond .diamond.center {
+            width: 8px;
+            height: 8px;
+            border-color: rgba(255,255,255,0.5);
+        }
+    </style>
+</head>
+<body>
+    <h1>Project Separator Options</h1>
+    <p class="intro">Preview how each separator would look between tour sections</p>
+
+    <!-- NEW: Alchemy Circle with Lines -->
+    <div class="option" style="border-color: rgba(255,255,255,0.3);">
+        <div class="option-title" style="color: rgba(255,255,255,0.7);">★ New: Alchemy Circle with Lines</div>
+        <div class="demo-context">
+            <h2>Lainey Wilson:<br>Whirlwind Tour</h2>
+            <p class="role">Lighting Programmer</p>
+        </div>
+        <div class="separator-alchemy-lines">
+            <div class="line"></div>
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Outer circle -->
+                <circle cx="50" cy="50" r="45" stroke="white" stroke-width="2"/>
+                <!-- Inner circle -->
+                <circle cx="50" cy="50" r="30" stroke="white" stroke-width="1.5"/>
+                <!-- Diamond -->
+                <path d="M50 20 L80 50 L50 80 L20 50 Z" stroke="white" stroke-width="1.5" fill="none"/>
+                <!-- Center dot -->
+                <circle cx="50" cy="50" r="3" fill="white"/>
+            </svg>
+            <div class="line right"></div>
+        </div>
+        <div class="demo-context">
+            <h2>Kendrick Lamar:<br>Grand National Tour</h2>
+            <p class="role">Lighting Programmer</p>
+        </div>
+    </div>
+
+    <!-- VARIATION A: Spin Pulse -->
+    <div class="option">
+        <div class="option-title">Variation A: Spin Pulse</div>
+        <div class="demo-context">
+            <h2>Lainey Wilson:<br>Whirlwind Tour</h2>
+            <p class="role">Lighting Programmer</p>
+        </div>
+        <div class="separator-alchemy-lines separator-alchemy-spin">
+            <div class="line"></div>
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="45" stroke="white" stroke-width="2"/>
+                <circle cx="50" cy="50" r="30" stroke="white" stroke-width="1.5"/>
+                <path d="M50 20 L80 50 L50 80 L20 50 Z" stroke="white" stroke-width="1.5" fill="none"/>
+                <circle cx="50" cy="50" r="3" fill="white"/>
+            </svg>
+            <div class="line right"></div>
+        </div>
+        <div class="demo-context">
+            <h2>Kendrick Lamar:<br>Grand National Tour</h2>
+            <p class="role">Lighting Programmer</p>
+        </div>
+    </div>
+
+    <!-- VARIATION B: Ripple Scale -->
+    <div class="option">
+        <div class="option-title">Variation B: Ripple Scale</div>
+        <div class="demo-context">
+            <h2>Lainey Wilson:<br>Whirlwind Tour</h2>
+            <p class="role">Lighting Programmer</p>
+        </div>
+        <div class="separator-alchemy-lines separator-alchemy-ripple">
+            <div class="line"></div>
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="45" stroke="white" stroke-width="2"/>
+                <circle cx="50" cy="50" r="30" stroke="white" stroke-width="1.5"/>
+                <path d="M50 20 L80 50 L50 80 L20 50 Z" stroke="white" stroke-width="1.5" fill="none"/>
+                <circle cx="50" cy="50" r="3" fill="white"/>
+            </svg>
+            <div class="line right"></div>
+        </div>
+        <div class="demo-context">
+            <h2>Kendrick Lamar:<br>Grand National Tour</h2>
+            <p class="role">Lighting Programmer</p>
+        </div>
+    </div>
+
+    <!-- VARIATION C: Ring Burst -->
+    <div class="option">
+        <div class="option-title">Variation C: Ring Burst</div>
+        <div class="demo-context">
+            <h2>Lainey Wilson:<br>Whirlwind Tour</h2>
+            <p class="role">Lighting Programmer</p>
+        </div>
+        <div class="separator-alchemy-lines separator-alchemy-burst">
+            <div class="line"></div>
+            <div class="ring"></div>
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="45" stroke="white" stroke-width="2"/>
+                <circle cx="50" cy="50" r="30" stroke="white" stroke-width="1.5"/>
+                <path d="M50 20 L80 50 L50 80 L20 50 Z" stroke="white" stroke-width="1.5" fill="none"/>
+                <circle cx="50" cy="50" r="3" fill="white"/>
+            </svg>
+            <div class="line right"></div>
+        </div>
+        <div class="demo-context">
+            <h2>Kendrick Lamar:<br>Grand National Tour</h2>
+            <p class="role">Lighting Programmer</p>
+        </div>
+    </div>
+
+    <!-- Option 1: Diamond Line -->
+    <div class="option">
+        <div class="option-title">Option 1: Diamond Line</div>
+        <div class="demo-context">
+            <h2>Lainey Wilson:<br>Whirlwind Tour</h2>
+            <p class="role">Lighting Programmer</p>
+        </div>
+        <div class="separator-diamond">
+            <div class="line"></div>
+            <div class="diamond"></div>
+            <div class="line"></div>
+        </div>
+        <div class="demo-context">
+            <h2>Kendrick Lamar:<br>Grand National Tour</h2>
+            <p class="role">Lighting Programmer</p>
+        </div>
+    </div>
+
+    <!-- Option 2: Triple Dots -->
+    <div class="option">
+        <div class="option-title">Option 2: Triple Dots</div>
+        <div class="demo-context">
+            <h2>Lainey Wilson:<br>Whirlwind Tour</h2>
+            <p class="role">Lighting Programmer</p>
+        </div>
+        <div class="separator-dots">
+            <div class="dot"></div>
+            <div class="dot center"></div>
+            <div class="dot"></div>
+        </div>
+        <div class="demo-context">
+            <h2>Kendrick Lamar:<br>Grand National Tour</h2>
+            <p class="role">Lighting Programmer</p>
+        </div>
+    </div>
+
+    <!-- Option 3: Converging Lines -->
+    <div class="option">
+        <div class="option-title">Option 3: Converging Lines</div>
+        <div class="demo-context">
+            <h2>Lainey Wilson:<br>Whirlwind Tour</h2>
+            <p class="role">Lighting Programmer</p>
+        </div>
+        <div class="separator-converge">
+            <svg viewBox="0 0 120 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <line x1="0" y1="10" x2="50" y2="10" stroke="white" stroke-width="1"/>
+                <line x1="70" y1="10" x2="120" y2="10" stroke="white" stroke-width="1"/>
+                <line x1="50" y1="10" x2="60" y2="5" stroke="white" stroke-width="1"/>
+                <line x1="50" y1="10" x2="60" y2="15" stroke="white" stroke-width="1"/>
+                <line x1="70" y1="10" x2="60" y2="5" stroke="white" stroke-width="1"/>
+                <line x1="70" y1="10" x2="60" y2="15" stroke="white" stroke-width="1"/>
+            </svg>
+        </div>
+        <div class="demo-context">
+            <h2>Kendrick Lamar:<br>Grand National Tour</h2>
+            <p class="role">Lighting Programmer</p>
+        </div>
+    </div>
+
+    <!-- Option 4: Mini Alchemy Circle -->
+    <div class="option">
+        <div class="option-title">Option 4: Mini Alchemy Circle</div>
+        <div class="demo-context">
+            <h2>Lainey Wilson:<br>Whirlwind Tour</h2>
+            <p class="role">Lighting Programmer</p>
+        </div>
+        <div class="separator-alchemy">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Outer circle -->
+                <circle cx="50" cy="50" r="45" stroke="white" stroke-width="2"/>
+                <!-- Inner circle -->
+                <circle cx="50" cy="50" r="30" stroke="white" stroke-width="1.5"/>
+                <!-- Diamond -->
+                <path d="M50 20 L80 50 L50 80 L20 50 Z" stroke="white" stroke-width="1.5" fill="none"/>
+                <!-- Center dot -->
+                <circle cx="50" cy="50" r="3" fill="white"/>
+            </svg>
+        </div>
+        <div class="demo-context">
+            <h2>Kendrick Lamar:<br>Grand National Tour</h2>
+            <p class="role">Lighting Programmer</p>
+        </div>
+    </div>
+
+    <!-- Option 5: Glowing Line -->
+    <div class="option">
+        <div class="option-title">Option 5: Glowing Line</div>
+        <div class="demo-context">
+            <h2>Lainey Wilson:<br>Whirlwind Tour</h2>
+            <p class="role">Lighting Programmer</p>
+        </div>
+        <div class="separator-glow">
+            <div class="line"></div>
+        </div>
+        <div class="demo-context">
+            <h2>Kendrick Lamar:<br>Grand National Tour</h2>
+            <p class="role">Lighting Programmer</p>
+        </div>
+    </div>
+
+    <!-- Option 6: Hexagon -->
+    <div class="option">
+        <div class="option-title">Option 6: Hexagon with Lines</div>
+        <div class="demo-context">
+            <h2>Lainey Wilson:<br>Whirlwind Tour</h2>
+            <p class="role">Lighting Programmer</p>
+        </div>
+        <div class="separator-hex">
+            <div class="line"></div>
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="50,5 95,27.5 95,72.5 50,95 5,72.5 5,27.5" stroke="white" stroke-width="4" fill="none"/>
+            </svg>
+            <div class="line right"></div>
+        </div>
+        <div class="demo-context">
+            <h2>Kendrick Lamar:<br>Grand National Tour</h2>
+            <p class="role">Lighting Programmer</p>
+        </div>
+    </div>
+
+    <!-- Option 7: Cross/Plus -->
+    <div class="option">
+        <div class="option-title">Option 7: Geometric Cross</div>
+        <div class="demo-context">
+            <h2>Lainey Wilson:<br>Whirlwind Tour</h2>
+            <p class="role">Lighting Programmer</p>
+        </div>
+        <div class="separator-cross">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <line x1="50" y1="10" x2="50" y2="90" stroke="white" stroke-width="2"/>
+                <line x1="10" y1="50" x2="90" y2="50" stroke="white" stroke-width="2"/>
+                <circle cx="50" cy="50" r="8" stroke="white" stroke-width="2" fill="none"/>
+            </svg>
+        </div>
+        <div class="demo-context">
+            <h2>Kendrick Lamar:<br>Grand National Tour</h2>
+            <p class="role">Lighting Programmer</p>
+        </div>
+    </div>
+
+    <!-- Option 8: Triple Diamond -->
+    <div class="option">
+        <div class="option-title">Option 8: Triple Diamond</div>
+        <div class="demo-context">
+            <h2>Lainey Wilson:<br>Whirlwind Tour</h2>
+            <p class="role">Lighting Programmer</p>
+        </div>
+        <div class="separator-double-diamond">
+            <div class="diamond"></div>
+            <div class="diamond center"></div>
+            <div class="diamond"></div>
+        </div>
+        <div class="demo-context">
+            <h2>Kendrick Lamar:<br>Grand National Tour</h2>
+            <p class="role">Lighting Programmer</p>
+        </div>
+    </div>
+
+</body>
+</html>
