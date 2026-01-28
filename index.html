@@ -1247,11 +1247,18 @@
         }
 
         .project-separator .line {
-            width: 80px;
+            width: 28vw;
+            max-width: 300px;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent);
             position: relative;
             overflow: hidden;
+        }
+
+        @media (max-width: 600px) {
+            .project-separator .line {
+                width: 25vw;
+            }
         }
 
         .project-separator .line::before {
@@ -1261,7 +1268,7 @@
             left: -50%;
             width: 50%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.9), transparent);
             animation: lineSweep 7s ease-in-out infinite;
         }
 
@@ -1285,51 +1292,56 @@
 
         .project-separator .icon {
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .project-separator svg {
-            width: 28px;
-            height: 28px;
-            opacity: 0.35;
+            width: 32px;
+            height: 32px;
+            opacity: 0.9;
+            display: block;
             animation: circleGlowSep 7s ease-in-out infinite;
         }
 
         @keyframes circleGlowSep {
-            0%, 30% { opacity: 0.35; filter: drop-shadow(0 0 0 transparent); }
-            45% { opacity: 0.6; filter: drop-shadow(0 0 8px rgba(255,255,255,0.3)); }
-            60%, 100% { opacity: 0.35; filter: drop-shadow(0 0 0 transparent); }
+            0%, 30% { opacity: 0.9; filter: drop-shadow(0 0 0 transparent); }
+            45% { opacity: 1; filter: drop-shadow(0 0 12px rgba(255,255,255,0.6)); }
+            60%, 100% { opacity: 0.9; filter: drop-shadow(0 0 0 transparent); }
         }
 
         .project-separator .ring {
             position: absolute;
             left: 50%;
             top: 50%;
-            transform: translate(-50%, -50%);
-            width: 28px;
-            height: 28px;
-            border: 1px solid rgba(255,255,255,0.25);
-            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            border: 1px solid rgba(255,255,255,0.7);
             opacity: 0;
+            pointer-events: none;
+            transform: translate(-50%, -50%) rotate(45deg);
             animation: ringBurstSep 7s ease-out infinite;
         }
 
         @keyframes ringBurstSep {
             0%, 40% {
-                transform: translate(-50%, -50%) scale(1);
+                transform: translate(-50%, -50%) rotate(45deg) scale(0.3);
                 opacity: 0;
                 filter: blur(0px);
             }
             44% {
-                opacity: 0.6;
+                transform: translate(-50%, -50%) rotate(45deg) scale(0.5);
+                opacity: 1;
                 filter: blur(0px);
             }
             52% {
-                transform: translate(-50%, -50%) scale(1.6);
-                opacity: 0.35;
+                transform: translate(-50%, -50%) rotate(45deg) scale(1.4);
+                opacity: 0.6;
                 filter: blur(1.5px);
             }
             62% {
-                transform: translate(-50%, -50%) scale(2.2);
+                transform: translate(-50%, -50%) rotate(45deg) scale(2.2);
                 opacity: 0;
                 filter: blur(4px);
             }
@@ -1432,9 +1444,10 @@
             <div class="icon">
                 <div class="ring"></div>
                 <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="50" cy="50" r="45" stroke="white" stroke-width="2"/>
-                    <circle cx="50" cy="50" r="30" stroke="white" stroke-width="1.5"/>
-                    <path d="M50 20 L80 50 L50 80 L20 50 Z" stroke="white" stroke-width="1.5" fill="none"/>
+                    <path d="M50 5 L95 50 L50 95 L5 50 Z" stroke="white" stroke-width="2" fill="none"/>
+                    <path d="M50 25 L75 50 L50 75 L25 50 Z" stroke="white" stroke-width="1.5" fill="none"/>
+                    <line x1="50" y1="25" x2="50" y2="75" stroke="white" stroke-width="1"/>
+                    <line x1="25" y1="50" x2="75" y2="50" stroke="white" stroke-width="1"/>
                     <circle cx="50" cy="50" r="3" fill="white"/>
                 </svg>
             </div>
@@ -1458,9 +1471,10 @@
             <div class="icon">
                 <div class="ring"></div>
                 <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="50" cy="50" r="45" stroke="white" stroke-width="2"/>
-                    <circle cx="50" cy="50" r="30" stroke="white" stroke-width="1.5"/>
-                    <path d="M50 20 L80 50 L50 80 L20 50 Z" stroke="white" stroke-width="1.5" fill="none"/>
+                    <path d="M50 5 L95 50 L50 95 L5 50 Z" stroke="white" stroke-width="2" fill="none"/>
+                    <path d="M50 25 L75 50 L50 75 L25 50 Z" stroke="white" stroke-width="1.5" fill="none"/>
+                    <line x1="50" y1="25" x2="50" y2="75" stroke="white" stroke-width="1"/>
+                    <line x1="25" y1="50" x2="75" y2="50" stroke="white" stroke-width="1"/>
                     <circle cx="50" cy="50" r="3" fill="white"/>
                 </svg>
             </div>
@@ -1484,9 +1498,10 @@
             <div class="icon">
                 <div class="ring"></div>
                 <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="50" cy="50" r="45" stroke="white" stroke-width="2"/>
-                    <circle cx="50" cy="50" r="30" stroke="white" stroke-width="1.5"/>
-                    <path d="M50 20 L80 50 L50 80 L20 50 Z" stroke="white" stroke-width="1.5" fill="none"/>
+                    <path d="M50 5 L95 50 L50 95 L5 50 Z" stroke="white" stroke-width="2" fill="none"/>
+                    <path d="M50 25 L75 50 L50 75 L25 50 Z" stroke="white" stroke-width="1.5" fill="none"/>
+                    <line x1="50" y1="25" x2="50" y2="75" stroke="white" stroke-width="1"/>
+                    <line x1="25" y1="50" x2="75" y2="50" stroke="white" stroke-width="1"/>
                     <circle cx="50" cy="50" r="3" fill="white"/>
                 </svg>
             </div>
@@ -1526,9 +1541,10 @@
             <div class="icon">
                 <div class="ring"></div>
                 <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="50" cy="50" r="45" stroke="white" stroke-width="2"/>
-                    <circle cx="50" cy="50" r="30" stroke="white" stroke-width="1.5"/>
-                    <path d="M50 20 L80 50 L50 80 L20 50 Z" stroke="white" stroke-width="1.5" fill="none"/>
+                    <path d="M50 5 L95 50 L50 95 L5 50 Z" stroke="white" stroke-width="2" fill="none"/>
+                    <path d="M50 25 L75 50 L50 75 L25 50 Z" stroke="white" stroke-width="1.5" fill="none"/>
+                    <line x1="50" y1="25" x2="50" y2="75" stroke="white" stroke-width="1"/>
+                    <line x1="25" y1="50" x2="75" y2="50" stroke="white" stroke-width="1"/>
                     <circle cx="50" cy="50" r="3" fill="white"/>
                 </svg>
             </div>
