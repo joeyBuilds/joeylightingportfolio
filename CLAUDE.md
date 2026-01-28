@@ -175,6 +175,83 @@ A decade of experience has taught me that great lighting isn't about the rig. It
 
 ---
 
+## January 28, 2026 Updates
+
+### iOS Chrome Favicon Fix
+- **Problem:** Favicon wasn't appearing on Chrome tabs on iOS (showed generic globe icon)
+- **Root cause:** iOS Chrome doesn't support SVG favicons — requires PNG format
+- **Solution:** Generated properly sized PNG favicons from `AlchemyCircleRounded.png`
+- **Files created:**
+  - `images/favicon-32x32.png` — for tab icons
+  - `images/favicon-16x16.png` — for smaller displays
+  - `images/apple-touch-icon.png` — for iOS home screen (180x180)
+  - `favicon.ico` in root directory — fallback
+  - `apple-touch-icon.png` in root directory — fallback
+- **HTML updated:** PNG favicon links placed before SVG so iOS picks them up first
+
+### Mobile/Tablet Logo Size Increase
+- Increased nav logo size for better visibility on mobile/tablet
+- **Logo font-size:** 1.12rem → 1.25rem
+- **Nav-logo height:** 2.34em → 2.8em
+- **Nav gradient adjusted:** Extended slightly to accommodate larger logo while maintaining legibility
+
+### Animated Project Separators
+Added sleek geometric separators between tour project sections with multi-layered animation effects.
+
+#### Final Design: Diamond Shape
+Chosen to contrast with circular floating background elements:
+- Outer diamond frame
+- Inner diamond
+- Cross lines through center
+- Center dot
+
+#### Animation Effects (7-second cycle)
+1. **Line sweep:** Light pulses travel inward along lines toward center, fading out before reaching the end
+2. **Diamond glow:** Center diamond pulses brighter with drop-shadow when waves arrive
+3. **Ring burst:** Diamond-shaped ring expands outward from center dot with blur dissolve effect
+
+#### Separator Placement
+Separators added between:
+- Lainey Wilson → Kendrick Lamar
+- Kendrick Lamar → Rage Against The Machine
+- Rage Against The Machine → Backstreet Boys
+- Taylor Swift → Jonas Brothers
+
+**NOT placed after:**
+- Backstreet Boys (has "Operating" section divider)
+- Jonas Brothers (end of projects section)
+
+#### Responsive Design
+- Lines use viewport units: 28vw on desktop/tablet, 25vw on mobile
+- Max-width: 300px to prevent excessive length on ultrawide monitors
+
+#### CSS Classes
+```css
+.project-separator        /* Container */
+.project-separator .line  /* Animated sweep lines */
+.project-separator .icon  /* Center icon container */
+.project-separator .ring  /* Diamond burst effect element */
+```
+
+#### Keyframe Animations
+- `lineSweep` / `lineSweepReverse` — Converging line pulse animations
+- `circleGlowSep` — Diamond glow/pulse effect
+- `ringBurstSep` — Expanding diamond burst with blur dissolve (starts at scale 0.3, expands to 2.2)
+
+### Design Exploration File
+- `separator-options.html` — Preview file with all separator designs explored:
+  - **Shapes:** Diamond, Square Alchemy, Hexagon, Original Circle
+  - **Effects:** Glow, Spin Pulse, Ripple Scale, Ring Burst
+  - Useful for future design iterations
+
+### Floating Background Elements Refinement
+Reduced visual noise from the floating geometric background elements:
+- **Canvas opacity:** 0.6 → 0.45
+- **Node opacity range:** 0.15-0.4 → 0.1-0.3
+- **Added blur:** 1px CSS filter blur for softer, more ambient appearance
+
+---
+
 ## Deployment
 Hosted on Vercel. Deploy with:
 ```bash
