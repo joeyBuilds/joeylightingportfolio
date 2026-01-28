@@ -10,7 +10,7 @@ Portfolio website for Joey Troup, a concert lighting programmer. The site featur
 ### Parallax Scrolling (Desktop Only)
 - Hero and tour images shift at different speeds while scrolling for depth effect
 - Implemented via `data-parallax` attributes with configurable speed values
-- **Disabled on mobile (≤900px)** to prevent jitter
+- **Disabled on tablet/mobile (≤1100px)** to prevent jitter
 
 ### Text Animations
 - Hero title reveals with slide-up word animation
@@ -57,25 +57,33 @@ The floating nodes are recreations of Joey's actual logo featuring:
 
 ## Functionality
 
+### Nav Bar Logo
+- AlchemyCircleRounded.png image displayed before "Joey Troup" text in nav
+- Slow 20s infinite clockwise spin animation (`logoSpin` keyframe)
+- Desktop: circle 4.3em, name 1.37rem
+- Mobile (≤1100px): circle 2.34em, name 1.12rem
+- Nav background gradient strengthened for legibility: solid black fading to transparent, prevents content from showing through behind logo
+
 ### Preloader
 - Branded loading animation with light-beam sweep
+- Beam widened to `min(400px, 60vw)` for desktop visibility (was 200px)
 - "Joey Troup" text with pulsing glow
 - 1.5 second display before fade-out
 
 ### Mobile Optimization
 
 #### Hero Image Positioning
-- **Tablet (≤900px):** `object-position: 70% center` — pans image right to center silhouette
-- **Phone (≤600px):** `object-position: 75% center` — pans even more right
+- **Tablet (≤1100px):** `object-position: 65% center` — pans image right to center silhouette
+- **Phone (≤600px):** `object-position: 65% center` — pans even more right
 
 #### Jitter Prevention
 - All image transforms disabled on mobile with `transform: none !important`
 - All animations disabled on mobile with `animation: none !important`
-- Parallax JavaScript returns early on mobile (≤900px)
+- Parallax JavaScript returns early on mobile (≤1100px)
 - Ken Burns animation disabled on mobile
 
 #### Layout Adjustments
-- Dedicated tablet breakpoint (max-width: 900px)
+- Dedicated tablet breakpoint (max-width: 1100px) — raised from 900px for better mid-size viewport support
 - Dedicated phone breakpoint (max-width: 600px)
 - Constrained image heights (45-60vh tablet, 35-50vh phone)
 - Lazy loading on all below-fold images
@@ -96,9 +104,16 @@ I started behind a drum kit and ended up behind a lighting console. Turns out bo
 A decade of experience has taught me that great lighting isn't about the rig. It's about accentuating the artist's vision, and pulling the audience into their story.
 ```
 
+### Scroll Hint
+- "Scroll" text replaced with SVG downward-pointing geometric arrow
+- Gentle bobbing animation (`scrollBob` keyframe, 2s loop)
+
 ### Contact Section
 - "Available for tours, festivals & special events" text **removed**
 - Clean layout with just title and email
+
+### Footer
+- Copyright updated to "© 2026 Joey Troup | Equivalent Exchange LLC"
 
 ---
 

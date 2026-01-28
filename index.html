@@ -62,12 +62,13 @@
         }
 
         .preloader-beam {
-            width: 200px;
+            width: min(400px, 60vw);
             height: 2px;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.35);
             border-radius: 2px;
             overflow: hidden;
             position: relative;
+            margin-top: 2rem;
         }
 
         .preloader-beam::before {
@@ -230,15 +231,29 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%);
+            background: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.95) 55%, rgba(0,0,0,0.4) 80%, transparent 100%);
+            padding-bottom: 2.5rem;
         }
 
         .logo {
-            font-size: 0.95rem;
+            font-size: 1.37rem;
             font-weight: 600;
             color: #fff;
             letter-spacing: 0.05em;
             text-transform: uppercase;
+        }
+
+        .nav-logo {
+            height: 4.3em;
+            width: auto;
+            vertical-align: middle;
+            margin-right: 0.4em;
+            animation: logoSpin 20s linear infinite;
+        }
+
+        @keyframes logoSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .nav-links {
@@ -419,11 +434,6 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 0.5rem;
-            color: rgba(255,255,255,0.5);
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
             opacity: 0;
             animation: scrollHintFade 0.6s ease 2s forwards;
         }
@@ -432,17 +442,13 @@
             to { opacity: 1; }
         }
 
-        .scroll-hint::after {
-            content: '';
-            width: 1px;
-            height: 40px;
-            background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
-            animation: scrollPulse 2s ease-in-out infinite;
+        .scroll-arrow {
+            animation: scrollBob 2s ease-in-out infinite;
         }
 
-        @keyframes scrollPulse {
-            0%, 100% { opacity: 0.5; transform: scaleY(1); }
-            50% { opacity: 1; transform: scaleY(1.2); }
+        @keyframes scrollBob {
+            0%, 100% { transform: translateY(0); opacity: 0.5; }
+            50% { transform: translateY(8px); opacity: 1; }
         }
 
         /* ============================================
@@ -911,13 +917,21 @@
         /* ============================================
            RESPONSIVE - Tablet
            ============================================ */
-        @media (max-width: 900px) {
+        @media (max-width: 1100px) {
             nav {
                 padding: 1rem 1.5rem;
             }
 
             .nav-links {
                 display: none;
+            }
+
+            .logo {
+                font-size: 1.12rem;
+            }
+
+            .nav-logo {
+                height: 2.34em;
             }
 
             .hero {
@@ -1140,7 +1154,7 @@
     </div>
 
     <nav>
-        <div class="logo">Joey Troup</div>
+        <div class="logo"><img src="images/AlchemyCircleRounded.png" alt="Logo" class="nav-logo">Joey Troup</div>
         <ul class="nav-links">
             <li><a href="#work">Work</a></li>
             <li><a href="#about">About</a></li>
@@ -1161,7 +1175,12 @@
                 </h1>
                 <p class="hero-subtitle">Concert lighting programmer crafting immersive experiences for live events and tours worldwide.</p>
             </div>
-            <div class="scroll-hint">Scroll</div>
+            <div class="scroll-hint">
+                <svg class="scroll-arrow" width="20" height="28" viewBox="0 0 20 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 0 L10 22" stroke="rgba(255,255,255,0.5)" stroke-width="1"/>
+                    <path d="M10 28 L4 18 L10 22 L16 18 Z" fill="rgba(255,255,255,0.5)"/>
+                </svg>
+            </div>
         </section>
 
         <!-- Intro with stadium photo and text -->
@@ -1279,7 +1298,7 @@
         </div>
 
         <footer>
-            <span>© 2026 Joey Troup</span>
+            <span>© 2026 Joey Troup | Equivalent Exchange LLC</span>
         </footer>
     </main>
 
@@ -1628,7 +1647,7 @@
 
         function updateParallax() {
             // Disable parallax on mobile to prevent jitter
-            if (window.innerWidth <= 900) {
+            if (window.innerWidth <= 1100) {
                 parallaxElements.forEach(el => {
                     if (el.querySelector('img')) {
                         el.querySelector('img').style.transform = 'none';
