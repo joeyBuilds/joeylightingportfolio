@@ -263,18 +263,24 @@
             width: auto;
             vertical-align: middle;
             margin-right: 0.5em;
+            opacity: 0;
             animation: logoSpinSettle 2.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
             animation-delay: 0.5s;
         }
 
         @keyframes logoSpinSettle {
             0% {
+                opacity: 0;
                 transform: rotate(0deg) scale(1);
+            }
+            15% {
+                opacity: 1;
             }
             50% {
                 transform: rotate(540deg) scale(1.15);
             }
             100% {
+                opacity: 1;
                 transform: rotate(720deg) scale(1);
             }
         }
@@ -1276,53 +1282,33 @@
                 padding: 2.5rem 2rem;
             }
 
-            .tour-image {
-                min-height: 45vh;
-                max-height: 60vh;
-                transform: none;
-                transition: opacity 1s ease;
-            }
-
-            .tour-feature.visible .tour-image {
-                transform: none;
-            }
-
-            .intro-image {
-                transform: none;
-                transition: opacity 1s ease;
-            }
-
-            .intro-section.visible .intro-image {
-                transform: none;
-            }
-
+            /* Mobile image containers - use animations for reliable fade */
+            .tour-image,
+            .intro-image,
             .about-image {
                 transform: none;
-                transition: opacity 1s ease 0.2s;
+                opacity: 0;
             }
 
+            .tour-feature.visible .tour-image,
+            .intro-section.visible .intro-image,
             .about.visible .about-image {
-                transform: none;
+                animation: mobileFadeIn 1s ease forwards;
             }
 
-            /* Disable Ken Burns and all transform animations on mobile */
-            /* Also set images to visible - let container handle the fade */
-            .tour-image img {
+            @keyframes mobileFadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+
+            /* Disable Ken Burns and transforms on mobile */
+            /* Images stay visible - container handles fade */
+            .tour-image img,
+            .intro-image img,
+            .about-image img {
                 transform: none !important;
                 animation: none !important;
                 opacity: 1 !important;
-            }
-
-            .intro-image img {
-                opacity: 1 !important;
-            }
-
-            .about-image img {
-                opacity: 1 !important;
-            }
-
-            .tour-feature.visible .tour-image img {
-                animation: none !important;
             }
 
             .section-divider {
@@ -1417,24 +1403,10 @@
             .tour-image {
                 min-height: 35vh;
                 max-height: 50vh;
-                transform: none;
-                transition: opacity 1s ease;
-            }
-
-            .tour-feature.visible .tour-image {
-                transform: none;
             }
 
             .tour-image img {
                 object-position: center;
-                transform: none !important;
-                animation: none !important;
-                opacity: 1 !important;
-            }
-
-            .intro-image img,
-            .about-image img {
-                opacity: 1 !important;
             }
 
             .about {
