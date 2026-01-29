@@ -344,13 +344,13 @@ Added a dedicated Press section between About and Contact to showcase media cove
 #### Content
 Three press cards featuring:
 1. **PLSN Magazine** - "1000 Words With Joey Troup" (Interview)
-   - Link: Digital publication viewer
-   - Thumbnail: `joeyandorion.jpeg` with custom `object-position: center 15%` to show faces
+   - Link: https://plsn.com/articles/1000-words-with/programmer-lighting-director-joey-troup/
+   - Thumbnail: `joeyandorion.jpeg` with custom `object-position: center 25%` to show faces
 2. **PLSN Magazine** - "Lainey Wilson Whirlwind Tour" (Feature)
    - Link: Digital publication viewer
-   - Thumbnail: `Lainey.webp`
+   - Thumbnail: `WhirlwindTour.png`
 3. **Event Elevator** - "Jonas Brothers • Happiness Begins Tour • Lighting Design Rundown with Joey Troup" (Video Interview)
-   - Link: YouTube embed
+   - Link: https://youtu.be/ph9vyRWhnHw
    - Thumbnail: Auto-pulled from YouTube API
 
 #### Card Design
