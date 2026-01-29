@@ -657,8 +657,13 @@
             width: 100%;
             height: auto;
             display: block;
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
             will-change: transform;
+            opacity: 0;
+        }
+
+        .intro-image img.loaded {
+            opacity: 1;
         }
 
         /* Ken Burns on hover */
@@ -823,8 +828,13 @@
             height: 100%;
             object-fit: cover;
             cursor: pointer;
-            transition: transform 8s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
             will-change: transform;
+            opacity: 0;
+        }
+
+        .tour-image img.loaded {
+            opacity: 1;
         }
 
         /* Ken Burns effect on view */
@@ -881,6 +891,12 @@
             height: auto;
             display: block;
             object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+
+        .about-image img.loaded {
+            opacity: 1;
         }
 
         .about-content {
@@ -1269,10 +1285,18 @@
             .tour-image img {
                 transform: none !important;
                 animation: none !important;
+                transition: opacity 0.8s ease !important;
             }
 
             .tour-feature.visible .tour-image img {
                 animation: none !important;
+            }
+
+            /* Ensure fade-in works on mobile */
+            .tour-image img.loaded,
+            .intro-image img.loaded,
+            .about-image img.loaded {
+                opacity: 1 !important;
             }
 
             .section-divider {
@@ -1373,6 +1397,7 @@
                 object-position: center;
                 transform: none !important;
                 animation: none !important;
+                transition: opacity 0.8s ease !important;
             }
 
             .about {
@@ -2347,6 +2372,24 @@
             if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
                 hamburger.classList.remove('active');
                 mobileMenu.classList.remove('active');
+            }
+        });
+
+        // ============================================
+        // IMAGE LOAD FADE-IN
+        // ============================================
+        // Handle smooth fade-in for lazy-loaded images
+        const fadeImages = document.querySelectorAll('.tour-image img, .intro-image img, .about-image img');
+
+        fadeImages.forEach(img => {
+            // If image is already loaded (cached), add class immediately
+            if (img.complete && img.naturalHeight !== 0) {
+                img.classList.add('loaded');
+            } else {
+                // Otherwise wait for load event
+                img.addEventListener('load', () => {
+                    img.classList.add('loaded');
+                });
             }
         });
     </script>
