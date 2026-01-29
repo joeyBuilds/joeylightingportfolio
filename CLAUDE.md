@@ -252,6 +252,90 @@ Reduced visual noise from the floating geometric background elements:
 
 ---
 
+## January 28, 2026 Session - Visual Polish & Animations
+
+### Hero Image Shutter Reveal Animation
+Dramatic reveal effect when page loads, replacing the simple fade-in:
+- **10 vertical shutter blades** that slide open to reveal the hero image
+- **Organic stagger timing** - blades open from center outward with non-uniform delays
+- Animation sequence: center blades (6,5,7) open first, outer blades (1,10) open last
+- Each blade has 1.6s animation duration with custom cubic-bezier easing
+- Blade delays range from 1.65s to 2.58s for natural, non-mechanical feel
+
+### Hero Text Timing Sync
+- Text reveal now synced to start as shutter animation completes
+- **First line:** 3.0s delay
+- **Second line:** 3.2s delay
+- **Subtitle:** 3.5s delay
+
+### Subtle Glitch Effect on Hero Image
+- Gentle RGB channel separation effect
+- Runs on 8-second cycle
+- Very subtle (1-2px offset) to avoid being distracting
+
+### Favicon Overhaul
+- Tested multiple source images for clarity on mobile
+- **Final choice:** `twotri_Rounded.png` (triangular geometric design)
+- Generated all required sizes:
+  - `favicon-16x16.png`, `favicon-32x32.png`, `favicon-48x48.png`
+  - `favicon-192x192.png`, `favicon-512x512.png`
+  - `apple-touch-icon.png` (180x180)
+  - `favicon.ico` (multi-size)
+
+### Nav Logo Updates
+- **Image:** Changed to `BetterAlchemyCircle_Rounded.png`
+- **Size increased:** 5.5em desktop (was 4.3em), 3.5em mobile (was 2.8em)
+- **Clickable:** Logo now scrolls to top of page when clicked
+- Added `.logo-link` wrapper with smooth scroll behavior
+
+### Contact Section - Complete Redesign
+
+#### Position Change
+- **Moved text to TOP of image** (was at bottom)
+- `justify-content: flex-start` with 3rem top padding
+
+#### Bold Text Shadow with Black Glow
+Multi-layer shadow for maximum legibility over white light beams in photo:
+```css
+text-shadow:
+    -2px -2px 0 rgba(0,0,0,0.9),
+    2px -2px 0 rgba(0,0,0,0.9),
+    -2px 2px 0 rgba(0,0,0,0.9),
+    2px 2px 0 rgba(0,0,0,0.9),
+    0 0 10px rgba(0,0,0,1),
+    0 0 20px rgba(0,0,0,1),
+    0 0 40px rgba(0,0,0,0.9),
+    0 0 60px rgba(0,0,0,0.7),
+    0 0 80px rgba(0,0,0,0.5);
+```
+- 4-corner outline (solid black edges)
+- 5 layers of blur glow radiating outward (10px to 80px)
+
+#### Spotlight Reveal Animation
+Text reveals with cinematic spotlight effect:
+- Starts blurred (10px) and invisible
+- Mid-animation: bright white/blue glow burst
+- Ends sharp with black glow shadow
+- **Title:** 0.3s delay after section visible
+- **Email:** 0.6s delay (staggered)
+
+#### Responsive Positioning
+Fine-tuned translateY values per breakpoint to avoid covering face in background image:
+- **Default (large):** translateY(0)
+- **1001-1100px:** translateY(-40px)
+- **601-1000px:** translateY(-10px)
+- **≤600px:** translateY(20px)
+
+### Demo Files Created (can be deleted)
+- `hero-reveal-demos.html` - 5 shutter reveal animation options
+- `hero-effects-demos.html` - Hero image effect options v1
+- `hero-effects-demos-2.html` - Hero image effect options v2
+- `contact-legibility-demos.html` - Contact text shadow options
+- `contact-reveal-demos.html` - Contact text reveal animation options
+- `contact-text-animation-demos.html` - Contact text animation options
+
+---
+
 ## Deployment
 Hosted on Vercel. Deploy with:
 ```bash

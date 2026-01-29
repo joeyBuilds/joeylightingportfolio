@@ -263,12 +263,20 @@
             width: auto;
             vertical-align: middle;
             margin-right: 0.5em;
-            animation: logoSpin 20s linear infinite;
+            animation: logoSpinSettle 2.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            animation-delay: 0.5s;
         }
 
-        @keyframes logoSpin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        @keyframes logoSpinSettle {
+            0% {
+                transform: rotate(0deg) scale(1);
+            }
+            50% {
+                transform: rotate(540deg) scale(1.15);
+            }
+            100% {
+                transform: rotate(720deg) scale(1);
+            }
         }
 
         .nav-links {
@@ -1194,7 +1202,34 @@
                 object-position: 65% center;
                 transform: none !important;
                 animation: none !important;
-                opacity: 1;
+                opacity: 0;
+            }
+
+            /* Disable shutter animation on mobile - use simple fade instead */
+            .hero-shutter-overlay {
+                display: none;
+            }
+
+            .shutter-animate .hero-image img {
+                animation: mobileHeroFade 1s ease-out 1.8s forwards !important;
+            }
+
+            @keyframes mobileHeroFade {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+
+            /* Adjust text timing for mobile fade (faster than shutter) */
+            .hero-title .line:first-child .word {
+                animation-delay: 2.5s;
+            }
+
+            .hero-title .line:last-child .word {
+                animation-delay: 2.7s;
+            }
+
+            .hero-subtitle {
+                animation-delay: 3.0s;
             }
 
             .intro-section {
