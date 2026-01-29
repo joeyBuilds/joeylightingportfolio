@@ -223,6 +223,10 @@
         [data-theme="about"] .blob-2 { background: #5a5a45; }
         [data-theme="about"] .blob-3 { background: #a0a080; }
 
+        [data-theme="press"] .blob-1 { background: #590098; }
+        [data-theme="press"] .blob-2 { background: #3a0065; }
+        [data-theme="press"] .blob-3 { background: #7b1ab8; }
+
         [data-theme="contact"] .blob-1 { background: #3870aa; }
         [data-theme="contact"] .blob-2 { background: #285898; }
         [data-theme="contact"] .blob-3 { background: #5888c0; }
@@ -987,6 +991,8 @@
             opacity: 0;
             z-index: 0;
             transition: opacity 1s ease 0.3s;
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 40%);
+            mask-image: linear-gradient(to bottom, transparent 0%, black 40%);
         }
 
         .contact.visible .contact-bg {
@@ -1132,6 +1138,193 @@
         .contact.visible .contact-subtext {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* ============================================
+           PRESS SECTION
+           ============================================ */
+        .press {
+            padding: 6rem 4rem 8rem;
+            text-align: center;
+        }
+
+        .press-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 3rem;
+            letter-spacing: -0.02em;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .press.visible .press-title {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .press-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .press-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            opacity: 0;
+            transform: translateY(40px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                        background 0.3s ease,
+                        border-color 0.3s ease,
+                        box-shadow 0.3s ease;
+        }
+
+        .press.visible .press-card:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
+        .press.visible .press-card:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.2s; }
+        .press.visible .press-card:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
+
+        .press-card:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 255, 255, 0.1);
+            transform: translateY(-6px);
+        }
+
+        .press-card-image {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            position: relative;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .press-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .press-card:hover .press-card-image img {
+            transform: scale(1.05);
+        }
+
+        /* Play button overlay for video */
+        .press-card-image.video::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.3);
+            transition: background 0.3s ease;
+        }
+
+        .press-card-image.video::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            z-index: 1;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .press-card:hover .press-card-image.video::before {
+            transform: translate(-50%, -50%) scale(1.1);
+            background: #fff;
+        }
+
+        .press-card-image.video .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-40%, -50%);
+            width: 0;
+            height: 0;
+            border-left: 20px solid #000;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            z-index: 2;
+        }
+
+        .press-card-content {
+            padding: 1.25rem;
+            text-align: left;
+        }
+
+        .press-card-publication {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 0.5rem;
+        }
+
+        .press-card-title {
+            font-size: 1rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.4;
+        }
+
+        .press-card-type {
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: rgba(255, 255, 255, 0.35);
+            margin-top: 0.75rem;
+        }
+
+        /* Article placeholder styling */
+        .press-card-image.article-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+        }
+
+        .press-card-image.article-placeholder .placeholder-icon {
+            font-size: 2.5rem;
+            color: rgba(255, 255, 255, 0.15);
+            font-weight: 300;
+        }
+
+        @media (max-width: 900px) {
+            .press-grid {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+            }
+
+            .press {
+                padding: 4rem 2rem 6rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .press {
+                padding: 3rem 1.25rem 5rem;
+            }
+
+            .press-title {
+                margin-bottom: 2rem;
+            }
         }
 
         /* ============================================
@@ -1613,6 +1806,7 @@
         <ul class="nav-links">
             <li><a href="#work">Work</a></li>
             <li><a href="#about">About</a></li>
+            <li><a href="#press">Press</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
         <button class="hamburger" id="hamburger" aria-label="Menu">
@@ -1627,6 +1821,7 @@
         <ul class="mobile-nav-links">
             <li><a href="#work">Work</a></li>
             <li><a href="#about">About</a></li>
+            <li><a href="#press">Press</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
     </div>
@@ -1827,6 +2022,76 @@
                 <img src="images/joeyabout.jpeg" alt="Joey Troup" loading="lazy">
             </div>
         </section>
+
+        <!-- Project Separator -->
+        <div class="project-separator">
+            <div class="line"></div>
+            <div class="icon">
+                <div class="ring"></div>
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50 5 L95 50 L50 95 L5 50 Z" stroke="white" stroke-width="2" fill="none"/>
+                    <path d="M50 25 L75 50 L50 75 L25 50 Z" stroke="white" stroke-width="1.5" fill="none"/>
+                    <line x1="50" y1="25" x2="50" y2="75" stroke="white" stroke-width="1"/>
+                    <line x1="25" y1="50" x2="75" y2="50" stroke="white" stroke-width="1"/>
+                    <circle cx="50" cy="50" r="3" fill="white"/>
+                </svg>
+            </div>
+            <div class="line right"></div>
+        </div>
+
+        <!-- Press Section -->
+        <section id="press" class="press" data-section="press">
+            <h2 class="press-title">Press</h2>
+            <div class="press-grid">
+                <a href="https://mydigitalpublication.com/publication/?i=856163&p=104&view=issueViewer" target="_blank" rel="noopener" class="press-card">
+                    <div class="press-card-image">
+                        <img src="images/joeyandorion.jpeg" alt="Joey Troup Interview" loading="lazy" style="object-position: center 15%;">
+                    </div>
+                    <div class="press-card-content">
+                        <p class="press-card-publication">PLSN Magazine</p>
+                        <p class="press-card-title">1000 Words With Joey Troup</p>
+                        <p class="press-card-type">Interview</p>
+                    </div>
+                </a>
+                <a href="https://mydigitalpublication.com/publication/?i=856163&p=74&view=issueViewer" target="_blank" rel="noopener" class="press-card">
+                    <div class="press-card-image">
+                        <img src="images/Lainey.webp" alt="Lainey Wilson Whirlwind Tour" loading="lazy">
+                    </div>
+                    <div class="press-card-content">
+                        <p class="press-card-publication">PLSN Magazine</p>
+                        <p class="press-card-title">Lainey Wilson Whirlwind Tour</p>
+                        <p class="press-card-type">Feature</p>
+                    </div>
+                </a>
+                <a href="https://youtu.be/ph9vyRWhnHw" target="_blank" rel="noopener" class="press-card">
+                    <div class="press-card-image video">
+                        <img src="https://img.youtube.com/vi/ph9vyRWhnHw/maxresdefault.jpg" alt="Jonas Brothers Happiness Begins Tour Lighting Design Rundown" loading="lazy">
+                        <div class="play-icon"></div>
+                    </div>
+                    <div class="press-card-content">
+                        <p class="press-card-publication">Event Elevator</p>
+                        <p class="press-card-title">Jonas Brothers • Happiness Begins Tour • Lighting Design Rundown with Joey Troup</p>
+                        <p class="press-card-type">Video Interview</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Project Separator -->
+        <div class="project-separator">
+            <div class="line"></div>
+            <div class="icon">
+                <div class="ring"></div>
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50 5 L95 50 L50 95 L5 50 Z" stroke="white" stroke-width="2" fill="none"/>
+                    <path d="M50 25 L75 50 L50 75 L25 50 Z" stroke="white" stroke-width="1.5" fill="none"/>
+                    <line x1="50" y1="25" x2="50" y2="75" stroke="white" stroke-width="1"/>
+                    <line x1="25" y1="50" x2="75" y2="50" stroke="white" stroke-width="1"/>
+                    <circle cx="50" cy="50" r="3" fill="white"/>
+                </svg>
+            </div>
+            <div class="line right"></div>
+        </div>
 
         <!-- Contact Section -->
         <section id="contact" class="contact" data-section="contact">
@@ -2239,18 +2504,39 @@
         const body = document.body;
 
         const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px 50px 0px'
+            threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5],
+            rootMargin: '0px 0px 0px 0px'
         };
+
+        // Track visibility of all sections
+        const sectionVisibility = new Map();
 
         const sectionObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const theme = entry.target.dataset.section;
-                    body.setAttribute('data-theme', theme);
+                // Update visibility tracking
+                sectionVisibility.set(entry.target, entry.intersectionRatio);
+
+                // Add visible class for animations
+                if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
                     entry.target.classList.add('visible');
                 }
             });
+
+            // Find the section with highest visibility
+            let maxRatio = 0;
+            let activeSection = null;
+            sectionVisibility.forEach((ratio, section) => {
+                if (ratio > maxRatio) {
+                    maxRatio = ratio;
+                    activeSection = section;
+                }
+            });
+
+            // Set theme based on most visible section
+            if (activeSection && maxRatio > 0.05) {
+                const theme = activeSection.dataset.section;
+                body.setAttribute('data-theme', theme);
+            }
         }, observerOptions);
 
         sections.forEach(section => {

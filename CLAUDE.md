@@ -336,6 +336,66 @@ Fine-tuned translateY values per breakpoint to avoid covering face in background
 
 ---
 
+## January 29, 2026 - Press Section
+
+### New Press Section Added
+Added a dedicated Press section between About and Contact to showcase media coverage without feeling self-promotional.
+
+#### Content
+Three press cards featuring:
+1. **PLSN Magazine** - "1000 Words With Joey Troup" (Interview)
+   - Link: Digital publication viewer
+   - Thumbnail: `joeyandorion.jpeg` with custom `object-position: center 15%` to show faces
+2. **PLSN Magazine** - "Lainey Wilson Whirlwind Tour" (Feature)
+   - Link: Digital publication viewer
+   - Thumbnail: `Lainey.webp`
+3. **Event Elevator** - "Jonas Brothers • Happiness Begins Tour • Lighting Design Rundown with Joey Troup" (Video Interview)
+   - Link: YouTube embed
+   - Thumbnail: Auto-pulled from YouTube API
+
+#### Card Design
+- Semi-transparent cards with pronounced borders (20% opacity default)
+- Hover state: 90% opaque border, stronger shadow, subtle glow, -6px lift
+- Staggered fade-in animation on scroll (0.1s, 0.2s, 0.3s delays)
+- 16:9 aspect ratio thumbnails with hover zoom effect
+- Video card includes play button overlay
+
+#### Purple Background Theme
+- Custom color scheme for Press section: `#590098` (vibrant purple) with darker/lighter variants
+- Theme triggered by intersection observer based on section visibility
+- Improved observer logic: now tracks which section has highest visibility ratio instead of "last triggered wins"
+
+#### Visual Transitions
+- **Divider before Press:** Diamond separator after About section
+- **Divider after Press:** Diamond separator before Contact section
+- **Extra breathing room:** Increased bottom padding (8rem desktop, 6rem tablet, 5rem mobile)
+- **Contact image fade:** Gradient mask on `joeybeams.jpg` fades from transparent to opaque over top 40% to eliminate hard edge
+
+#### Navigation
+- "Press" added to both desktop nav links and mobile hamburger menu
+- Order: Work → About → Press → Contact
+
+#### CSS Classes
+```css
+.press                    /* Section container */
+.press-title              /* "Press" heading */
+.press-grid               /* 3-column grid (1-column on mobile) */
+.press-card               /* Individual card link */
+.press-card-image         /* Thumbnail container */
+.press-card-image.video   /* Video thumbnail with play button */
+.press-card-content       /* Text content area */
+.press-card-publication   /* Publication name */
+.press-card-title         /* Article/video title */
+.press-card-type          /* "Interview", "Feature", "Video Interview" */
+```
+
+#### Responsive Breakpoints
+- **Desktop:** 3-column grid, max-width 1100px
+- **Tablet (≤900px):** Single column, max-width 500px
+- **Mobile (≤600px):** Reduced padding, smaller title margin
+
+---
+
 ## Deployment
 Hosted on Vercel. Deploy with:
 ```bash
