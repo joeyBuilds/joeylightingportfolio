@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hero Image Effects — Preview</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            padding: 3rem 2rem 2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: rgba(255,255,255,0.6);
+            font-size: 1rem;
+        }
+
+        .demos-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            padding: 3rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .demo-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .demo-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .demo-header h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .demo-header span {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.5);
+            background: rgba(255,255,255,0.1);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+        }
+
+        .demo-description {
+            padding: 1rem 1.5rem;
+            color: rgba(255,255,255,0.6);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .demo-viewport {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #000;
+            overflow: hidden;
+        }
+
+        .demo-viewport img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            opacity: 0.5;
+        }
+
+        .replay-btn {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #fff;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            z-index: 100;
+        }
+
+        .replay-btn:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
+        /* ============================================
+           OPTION 1: KEN BURNS
+           ============================================ */
+        .kenburns-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .kenburns-container img {
+            animation: kenburnsEffect 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes kenburnsEffect {
+            0% {
+                transform: scale(1) translate(0, 0);
+            }
+            100% {
+                transform: scale(1.08) translate(-1%, -1%);
+            }
+        }
+
+        /* ============================================
+           OPTION 2: PARALLAX MOUSE TRACKING
+           ============================================ */
+        .parallax-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .parallax-container img {
+            transform: scale(1.1);
+            transition: transform 0.3s ease-out;
+        }
+
+        /* ============================================
+           OPTION 3: REACTIVE LIGHT FLARES
+           ============================================ */
+        .flare-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .light-flare {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(100,150,255,0.4) 0%, rgba(100,150,255,0.1) 40%, transparent 70%);
+            pointer-events: none;
+            filter: blur(20px);
+            transition: transform 0.2s ease-out, opacity 0.3s ease;
+            mix-blend-mode: screen;
+        }
+
+        .light-flare.secondary {
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(255,150,100,0.3) 0%, rgba(255,150,100,0.1) 40%, transparent 70%);
+        }
+
+        .pulse-flare {
+            position: absolute;
+            top: 30%;
+            left: 60%;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            pointer-events: none;
+            filter: blur(15px);
+            animation: pulseGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.5); opacity: 0.6; }
+        }
+
+        /* ============================================
+           OPTION 4: COLOR WASH
+           ============================================ */
+        .colorwash-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .color-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg,
+                rgba(100, 50, 150, 0.3) 0%,
+                rgba(50, 100, 200, 0.2) 50%,
+                rgba(150, 50, 100, 0.3) 100%);
+            mix-blend-mode: color;
+            animation: colorShift 10s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes colorShift {
+            0%, 100% {
+                background: linear-gradient(135deg,
+                    rgba(100, 50, 150, 0.3) 0%,
+                    rgba(50, 100, 200, 0.2) 50%,
+                    rgba(150, 50, 100, 0.3) 100%);
+            }
+            33% {
+                background: linear-gradient(135deg,
+                    rgba(50, 100, 200, 0.3) 0%,
+                    rgba(150, 50, 150, 0.2) 50%,
+                    rgba(200, 100, 50, 0.3) 100%);
+            }
+            66% {
+                background: linear-gradient(135deg,
+                    rgba(150, 50, 100, 0.3) 0%,
+                    rgba(100, 150, 50, 0.2) 50%,
+                    rgba(50, 100, 200, 0.3) 100%);
+            }
+        }
+
+        /* ============================================
+           OPTION 5: FLOATING HAZE PARTICLES
+           ============================================ */
+        .haze-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .haze-canvas {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.5rem; }
+            .demos-grid { padding: 2rem 1rem; gap: 2rem; }
+            .demo-header { padding: 1rem; }
+            .demo-header h2 { font-size: 1.1rem; }
+            .demo-description { padding: 0.75rem 1rem; font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Hero Image Effects</h1>
+        <p>Post-reveal animations to bring the hero to life</p>
+    </header>
+
+    <div class="demos-grid">
+        <!-- Option 1: Ken Burns -->
+        <div class="demo-card">
+            <div class="demo-header">
+                <h2>1. Slow Ken Burns</h2>
+                <span>Cinematic</span>
+            </div>
+            <div class="demo-description">
+                A subtle, continuous zoom and pan that gives the image a cinematic, living quality. Slowly scales from 100% to 108% over 20 seconds.
+            </div>
+            <div class="demo-viewport">
+                <div class="kenburns-container">
+                    <img src="images/joeyprofile.jpg" alt="Demo">
+                </div>
+            </div>
+        </div>
+
+        <!-- Option 2: Parallax Mouse Tracking -->
+        <div class="demo-card">
+            <div class="demo-header">
+                <h2>2. Parallax Mouse Tracking</h2>
+                <span>Interactive</span>
+            </div>
+            <div class="demo-description">
+                The image subtly shifts based on mouse position, creating depth and interactivity. Move your mouse around the image to see the effect.
+            </div>
+            <div class="demo-viewport">
+                <div class="parallax-container" id="parallaxContainer">
+                    <img src="images/joeyprofile.jpg" alt="Demo" id="parallaxImg">
+                </div>
+            </div>
+        </div>
+
+        <!-- Option 3: Reactive Light Flares -->
+        <div class="demo-card">
+            <div class="demo-header">
+                <h2>3. Reactive Light Flares</h2>
+                <span>Stage Lighting</span>
+            </div>
+            <div class="demo-description">
+                Soft glows that follow the mouse cursor, plus a gentle pulsing flare. Like a follow-spot responding to movement — ties into the lighting theme.
+            </div>
+            <div class="demo-viewport">
+                <div class="flare-container" id="flareContainer">
+                    <img src="images/joeyprofile.jpg" alt="Demo">
+                    <div class="light-flare" id="flare1"></div>
+                    <div class="light-flare secondary" id="flare2"></div>
+                    <div class="pulse-flare"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Option 4: Color Wash -->
+        <div class="demo-card">
+            <div class="demo-header">
+                <h2>4. Drifting Color Wash</h2>
+                <span>Stage Gels</span>
+            </div>
+            <div class="demo-description">
+                A slow-moving gradient overlay that shifts through colors like stage lighting gels. Subtle enough to not distract but adds atmosphere.
+            </div>
+            <div class="demo-viewport">
+                <div class="colorwash-container">
+                    <img src="images/joeyprofile.jpg" alt="Demo">
+                    <div class="color-overlay"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Option 5: Floating Haze Particles -->
+        <div class="demo-card">
+            <div class="demo-header">
+                <h2>5. Floating Haze Particles</h2>
+                <span>Atmospheric</span>
+            </div>
+            <div class="demo-description">
+                Small, semi-transparent particles drift across the image like dust in a light beam or theatrical haze. Connects to the geometric particle network.
+            </div>
+            <div class="demo-viewport">
+                <div class="haze-container">
+                    <img src="images/joeyprofile.jpg" alt="Demo">
+                    <canvas class="haze-canvas" id="hazeCanvas"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // OPTION 2: Parallax Mouse Tracking
+        // ============================================
+        const parallaxContainer = document.getElementById('parallaxContainer');
+        const parallaxImg = document.getElementById('parallaxImg');
+
+        parallaxContainer.addEventListener('mousemove', (e) => {
+            const rect = parallaxContainer.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width - 0.5;
+            const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+            parallaxImg.style.transform = `scale(1.1) translate(${x * -20}px, ${y * -20}px)`;
+        });
+
+        parallaxContainer.addEventListener('mouseleave', () => {
+            parallaxImg.style.transform = 'scale(1.1) translate(0, 0)';
+        });
+
+        // ============================================
+        // OPTION 3: Reactive Light Flares
+        // ============================================
+        const flareContainer = document.getElementById('flareContainer');
+        const flare1 = document.getElementById('flare1');
+        const flare2 = document.getElementById('flare2');
+
+        flareContainer.addEventListener('mousemove', (e) => {
+            const rect = flareContainer.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            flare1.style.transform = `translate(${x - 100}px, ${y - 100}px)`;
+            flare1.style.opacity = '1';
+
+            // Secondary flare follows with delay
+            setTimeout(() => {
+                flare2.style.transform = `translate(${x - 75}px, ${y - 75}px)`;
+                flare2.style.opacity = '1';
+            }, 50);
+        });
+
+        flareContainer.addEventListener('mouseleave', () => {
+            flare1.style.opacity = '0';
+            flare2.style.opacity = '0';
+        });
+
+        // ============================================
+        // OPTION 5: Floating Haze Particles
+        // ============================================
+        const hazeCanvas = document.getElementById('hazeCanvas');
+        const hCtx = hazeCanvas.getContext('2d');
+        let hazeParticles = [];
+
+        function initHazeCanvas() {
+            const rect = hazeCanvas.parentElement.getBoundingClientRect();
+            hazeCanvas.width = rect.width;
+            hazeCanvas.height = rect.height;
+            createHazeParticles();
+        }
+
+        function createHazeParticles() {
+            hazeParticles = [];
+            const count = 40;
+            for (let i = 0; i < count; i++) {
+                hazeParticles.push({
+                    x: Math.random() * hazeCanvas.width,
+                    y: Math.random() * hazeCanvas.height,
+                    size: Math.random() * 3 + 1,
+                    speedX: (Math.random() - 0.3) * 0.5,
+                    speedY: (Math.random() - 0.5) * 0.3,
+                    opacity: Math.random() * 0.4 + 0.1
+                });
+            }
+        }
+
+        function animateHaze() {
+            hCtx.clearRect(0, 0, hazeCanvas.width, hazeCanvas.height);
+
+            hazeParticles.forEach(p => {
+                p.x += p.speedX;
+                p.y += p.speedY;
+
+                // Wrap around
+                if (p.x < -10) p.x = hazeCanvas.width + 10;
+                if (p.x > hazeCanvas.width + 10) p.x = -10;
+                if (p.y < -10) p.y = hazeCanvas.height + 10;
+                if (p.y > hazeCanvas.height + 10) p.y = -10;
+
+                // Draw particle
+                hCtx.beginPath();
+                hCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                hCtx.fillStyle = `rgba(255, 255, 255, ${p.opacity})`;
+                hCtx.fill();
+            });
+
+            requestAnimationFrame(animateHaze);
+        }
+
+        // Initialize
+        window.addEventListener('load', () => {
+            initHazeCanvas();
+            animateHaze();
+        });
+
+        window.addEventListener('resize', initHazeCanvas);
+    </script>
+</body>
+</html>

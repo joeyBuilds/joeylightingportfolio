@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hero Image Effects v2 — Preview</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            padding: 3rem 2rem 2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: rgba(255,255,255,0.6);
+            font-size: 1rem;
+        }
+
+        .demos-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            padding: 3rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .demo-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .demo-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .demo-header h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .demo-header span {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.5);
+            background: rgba(255,255,255,0.1);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+        }
+
+        .demo-description {
+            padding: 1rem 1.5rem;
+            color: rgba(255,255,255,0.6);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .demo-viewport {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #000;
+            overflow: hidden;
+        }
+
+        .demo-viewport img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .note {
+            padding: 1rem 1.5rem;
+            background: rgba(255,200,100,0.1);
+            border-top: 1px solid rgba(255,200,100,0.2);
+            color: rgba(255,200,100,0.8);
+            font-size: 0.85rem;
+        }
+
+        /* ============================================
+           OPTION 1: IMAGE CROSSFADE
+           ============================================ */
+        .crossfade-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .crossfade-container img {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+
+        .crossfade-container img.active {
+            opacity: 1;
+        }
+
+        /* ============================================
+           OPTION 2: FILM GRAIN
+           ============================================ */
+        .grain-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .grain-overlay {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.08;
+            z-index: 10;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            animation: grainShift 0.5s steps(10) infinite;
+        }
+
+        @keyframes grainShift {
+            0%, 100% { transform: translate(0, 0); }
+            10% { transform: translate(-2%, -2%); }
+            20% { transform: translate(2%, 2%); }
+            30% { transform: translate(-1%, 2%); }
+            40% { transform: translate(2%, -1%); }
+            50% { transform: translate(-2%, 1%); }
+            60% { transform: translate(1%, -2%); }
+            70% { transform: translate(-1%, -1%); }
+            80% { transform: translate(2%, 1%); }
+            90% { transform: translate(-2%, 2%); }
+        }
+
+        /* ============================================
+           OPTION 3: DOUBLE EXPOSURE
+           ============================================ */
+        .double-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .double-container img.base {
+            opacity: 1;
+        }
+
+        .double-container img.overlay {
+            position: absolute;
+            inset: 0;
+            mix-blend-mode: screen;
+            opacity: 0.4;
+            animation: doubleShift 15s ease-in-out infinite alternate;
+        }
+
+        @keyframes doubleShift {
+            0% { transform: scale(1) translate(0, 0); opacity: 0.3; }
+            50% { transform: scale(1.1) translate(2%, -2%); opacity: 0.5; }
+            100% { transform: scale(1.05) translate(-1%, 1%); opacity: 0.35; }
+        }
+
+        /* ============================================
+           OPTION 4: SCROLL TRANSFORM (simulated)
+           ============================================ */
+        .scroll-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .scroll-container img {
+            filter: grayscale(100%);
+            transition: filter 1s ease, transform 1s ease;
+        }
+
+        .scroll-container:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.05);
+        }
+
+        .scroll-hint-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.3);
+            color: white;
+            font-size: 0.9rem;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        .scroll-container:hover .scroll-hint-overlay {
+            opacity: 0;
+        }
+
+        /* ============================================
+           OPTION 5: VIGNETTE BREATHING
+           ============================================ */
+        .vignette-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .vignette-overlay {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.7) 100%);
+            animation: vignetteBreathe 6s ease-in-out infinite;
+        }
+
+        @keyframes vignetteBreathe {
+            0%, 100% {
+                background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.7) 100%);
+            }
+            50% {
+                background: radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,0.6) 100%);
+            }
+        }
+
+        /* ============================================
+           OPTION 6: GLITCH EFFECT
+           ============================================ */
+        .glitch-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch-container img {
+            position: relative;
+        }
+
+        .glitch-container img.glitch-r,
+        .glitch-container img.glitch-b {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+        }
+
+        .glitch-container img.glitch-r {
+            mix-blend-mode: multiply;
+            filter: url('#red-shift');
+        }
+
+        .glitch-container img.glitch-b {
+            mix-blend-mode: multiply;
+            filter: url('#blue-shift');
+        }
+
+        .glitch-container:hover img.glitch-r {
+            animation: glitchR 0.3s steps(2) infinite;
+        }
+
+        .glitch-container:hover img.glitch-b {
+            animation: glitchB 0.3s steps(2) infinite;
+        }
+
+        @keyframes glitchR {
+            0%, 100% { opacity: 0; transform: translate(0, 0); }
+            25% { opacity: 0.8; transform: translate(-3px, 1px); }
+            75% { opacity: 0.6; transform: translate(2px, -1px); }
+        }
+
+        @keyframes glitchB {
+            0%, 100% { opacity: 0; transform: translate(0, 0); }
+            25% { opacity: 0.6; transform: translate(3px, -1px); }
+            75% { opacity: 0.8; transform: translate(-2px, 1px); }
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.5rem; }
+            .demos-grid { padding: 2rem 1rem; gap: 2rem; }
+            .demo-header { padding: 1rem; }
+            .demo-header h2 { font-size: 1.1rem; }
+            .demo-description { padding: 0.75rem 1rem; font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Hero Image Effects v2</h1>
+        <p>Alternative approaches to bring the hero to life</p>
+    </header>
+
+    <div class="demos-grid">
+        <!-- Option 1: Image Crossfade -->
+        <div class="demo-card">
+            <div class="demo-header">
+                <h2>1. Image Crossfade</h2>
+                <span>Slideshow</span>
+            </div>
+            <div class="demo-description">
+                Multiple photos slowly crossfade between each other. Creates variety without being distracting. Requires 2-4 different photos.
+            </div>
+            <div class="demo-viewport">
+                <div class="crossfade-container" id="crossfade">
+                    <img src="images/joeyprofile.jpg" alt="Demo" class="active">
+                    <img src="images/joeybeams.jpg" alt="Demo">
+                    <img src="images/joeyabout.jpeg" alt="Demo">
+                </div>
+            </div>
+            <div class="note">
+                ⚠️ Would need multiple hero-worthy photos
+            </div>
+        </div>
+
+        <!-- Option 2: Film Grain -->
+        <div class="demo-card">
+            <div class="demo-header">
+                <h2>2. Animated Film Grain</h2>
+                <span>Cinematic</span>
+            </div>
+            <div class="demo-description">
+                A subtle, organic film grain overlay that gives the image texture and a cinematic, analog feel. Adds life without altering composition.
+            </div>
+            <div class="demo-viewport">
+                <div class="grain-container">
+                    <img src="images/joeyprofile.jpg" alt="Demo">
+                    <div class="grain-overlay"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Option 3: Double Exposure -->
+        <div class="demo-card">
+            <div class="demo-header">
+                <h2>3. Double Exposure Blend</h2>
+                <span>Artistic</span>
+            </div>
+            <div class="demo-description">
+                A second image (light beams) subtly blends with the portrait using screen blend mode. Creates depth and ties into the lighting theme.
+            </div>
+            <div class="demo-viewport">
+                <div class="double-container">
+                    <img src="images/joeyprofile.jpg" alt="Demo" class="base">
+                    <img src="images/joeybeams.jpg" alt="Demo" class="overlay">
+                </div>
+            </div>
+        </div>
+
+        <!-- Option 4: Scroll Transform -->
+        <div class="demo-card">
+            <div class="demo-header">
+                <h2>4. Hover/Scroll Transform</h2>
+                <span>Interactive</span>
+            </div>
+            <div class="demo-description">
+                Image starts grayscale and transforms to color on hover (or scroll on the real page). Creates a reveal moment as users engage.
+            </div>
+            <div class="demo-viewport">
+                <div class="scroll-container">
+                    <img src="images/joeyprofile.jpg" alt="Demo">
+                    <div class="scroll-hint-overlay">Hover to reveal color</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Option 5: Vignette Breathing -->
+        <div class="demo-card">
+            <div class="demo-header">
+                <h2>5. Vignette Breathing</h2>
+                <span>Subtle</span>
+            </div>
+            <div class="demo-description">
+                A gentle pulsing vignette that expands and contracts, creating a "breathing" focus effect. Very subtle — doesn't move the image.
+            </div>
+            <div class="demo-viewport">
+                <div class="vignette-container">
+                    <img src="images/joeyprofile.jpg" alt="Demo">
+                    <div class="vignette-overlay"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Option 6: Glitch Effect -->
+        <div class="demo-card">
+            <div class="demo-header">
+                <h2>6. Subtle Glitch</h2>
+                <span>Edgy</span>
+            </div>
+            <div class="demo-description">
+                RGB split and digital distortion on hover. Gives an edgy, tech-forward vibe. Hover over the image to see the effect.
+            </div>
+            <div class="demo-viewport">
+                <div class="glitch-container">
+                    <img src="images/joeyprofile.jpg" alt="Demo">
+                    <img src="images/joeyprofile.jpg" alt="Demo" class="glitch-r" style="opacity:0;">
+                    <img src="images/joeyprofile.jpg" alt="Demo" class="glitch-b" style="opacity:0;">
+                    <div class="glitch-color-overlay"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Image Crossfade
+        const crossfadeImages = document.querySelectorAll('#crossfade img');
+        let currentIndex = 0;
+
+        setInterval(() => {
+            crossfadeImages[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % crossfadeImages.length;
+            crossfadeImages[currentIndex].classList.add('active');
+        }, 4000);
+
+        // Glitch effect on hover
+        const glitchContainer = document.querySelector('.glitch-container');
+        const glitchR = glitchContainer.querySelector('.glitch-r');
+        const glitchB = glitchContainer.querySelector('.glitch-b');
+
+        glitchContainer.addEventListener('mouseenter', () => {
+            glitchR.style.opacity = '0.8';
+            glitchB.style.opacity = '0.8';
+        });
+
+        glitchContainer.addEventListener('mouseleave', () => {
+            glitchR.style.opacity = '0';
+            glitchB.style.opacity = '0';
+        });
+    </script>
+</body>
+</html>

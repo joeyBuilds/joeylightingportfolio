@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Text Reveal Demos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', -apple-system, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .instructions {
+            text-align: center;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 3rem;
+        }
+
+        .demos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .demo-card {
+            background: #111;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .demo-header {
+            padding: 1rem 1.5rem;
+            background: rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .demo-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .demo-number {
+            background: rgba(255,255,255,0.1);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        .demo-content {
+            position: relative;
+            height: 300px;
+            background-image: url('images/contact.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 2rem;
+        }
+
+        .demo-content::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%);
+        }
+
+        .contact-text {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .contact-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.8), 0 4px 40px rgba(0,0,0,0.6);
+        }
+
+        .contact-email {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.8), 0 4px 40px rgba(0,0,0,0.6);
+        }
+
+        .replay-btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+        }
+
+        .replay-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* ============================================
+           OPTION 1: SLIDE UP (SITE STYLE)
+           ============================================ */
+        .demo-1 .contact-title,
+        .demo-1 .contact-email {
+            opacity: 0;
+            transform: translateY(100%);
+        }
+
+        .demo-1.animate .contact-title {
+            animation: slideUp1 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+        }
+
+        .demo-1.animate .contact-email {
+            animation: slideUp1 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+        }
+
+        @keyframes slideUp1 {
+            from {
+                opacity: 0;
+                transform: translateY(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ============================================
+           OPTION 2: SPOTLIGHT REVEAL
+           ============================================ */
+        .demo-2 .contact-title,
+        .demo-2 .contact-email {
+            opacity: 0;
+            filter: blur(10px);
+            text-shadow: 0 0 0 transparent;
+        }
+
+        .demo-2.animate .contact-title {
+            animation: spotlightReveal 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+        }
+
+        .demo-2.animate .contact-email {
+            animation: spotlightReveal 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+        }
+
+        @keyframes spotlightReveal {
+            0% {
+                opacity: 0;
+                filter: blur(10px);
+                text-shadow: 0 0 0 transparent;
+            }
+            50% {
+                text-shadow: 0 0 40px rgba(255,255,255,0.8), 0 0 80px rgba(100,150,255,0.5);
+            }
+            100% {
+                opacity: 1;
+                filter: blur(0);
+                text-shadow: 0 2px 20px rgba(0,0,0,0.8), 0 4px 40px rgba(0,0,0,0.6);
+            }
+        }
+
+        /* ============================================
+           OPTION 3: LETTER STAGGER
+           ============================================ */
+        .demo-3 .contact-title,
+        .demo-3 .contact-email {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0;
+        }
+
+        .demo-3 .letter {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .demo-3 .space {
+            width: 0.3em;
+        }
+
+        .demo-3.animate .contact-title .letter {
+            animation: letterReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .demo-3.animate .contact-email .letter {
+            animation: letterReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes letterReveal {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ============================================
+           OPTION 4: HORIZONTAL WIPE
+           ============================================ */
+        .demo-4 .contact-title,
+        .demo-4 .contact-email {
+            clip-path: inset(0 100% 0 0);
+            opacity: 1;
+        }
+
+        .demo-4.animate .contact-title {
+            animation: wipeReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+        }
+
+        .demo-4.animate .contact-email {
+            animation: wipeReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+        }
+
+        @keyframes wipeReveal {
+            from {
+                clip-path: inset(0 100% 0 0);
+            }
+            to {
+                clip-path: inset(0 0 0 0);
+            }
+        }
+
+        /* ============================================
+           OPTION 5: SCALE & FADE
+           ============================================ */
+        .demo-5 .contact-title,
+        .demo-5 .contact-email {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        .demo-5.animate .contact-title {
+            animation: scaleFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+        }
+
+        .demo-5.animate .contact-email {
+            animation: scaleFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.45s forwards;
+        }
+
+        @keyframes scaleFade {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .demos-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .demo-content {
+                height: 250px;
+            }
+
+            .contact-title {
+                font-size: 1.4rem;
+            }
+
+            .contact-email {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Contact Text Reveal Options</h1>
+    <p class="instructions">Click "Replay" to see each animation again</p>
+
+    <div class="demos-grid">
+        <!-- Option 1: Slide Up -->
+        <div class="demo-card">
+            <div class="demo-header">
+                <span class="demo-title">Slide Up (Match Hero)</span>
+                <div>
+                    <span class="demo-number">Option 1</span>
+                    <button class="replay-btn" onclick="replay(1)">Replay</button>
+                </div>
+            </div>
+            <div class="demo-content demo-1 animate">
+                <div class="contact-text">
+                    <h2 class="contact-title">Let's create something unforgettable</h2>
+                    <span class="contact-email">joeytroup@gmail.com</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Option 2: Spotlight Reveal -->
+        <div class="demo-card">
+            <div class="demo-header">
+                <span class="demo-title">Spotlight Reveal</span>
+                <div>
+                    <span class="demo-number">Option 2</span>
+                    <button class="replay-btn" onclick="replay(2)">Replay</button>
+                </div>
+            </div>
+            <div class="demo-content demo-2 animate">
+                <div class="contact-text">
+                    <h2 class="contact-title">Let's create something unforgettable</h2>
+                    <span class="contact-email">joeytroup@gmail.com</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Option 3: Letter Stagger -->
+        <div class="demo-card">
+            <div class="demo-header">
+                <span class="demo-title">Letter Stagger</span>
+                <div>
+                    <span class="demo-number">Option 3</span>
+                    <button class="replay-btn" onclick="replay(3)">Replay</button>
+                </div>
+            </div>
+            <div class="demo-content demo-3 animate">
+                <div class="contact-text">
+                    <h2 class="contact-title" id="title-3"></h2>
+                    <span class="contact-email" id="email-3"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Option 4: Horizontal Wipe -->
+        <div class="demo-card">
+            <div class="demo-header">
+                <span class="demo-title">Horizontal Wipe</span>
+                <div>
+                    <span class="demo-number">Option 4</span>
+                    <button class="replay-btn" onclick="replay(4)">Replay</button>
+                </div>
+            </div>
+            <div class="demo-content demo-4 animate">
+                <div class="contact-text">
+                    <h2 class="contact-title">Let's create something unforgettable</h2>
+                    <span class="contact-email">joeytroup@gmail.com</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Option 5: Scale & Fade -->
+        <div class="demo-card">
+            <div class="demo-header">
+                <span class="demo-title">Scale & Fade</span>
+                <div>
+                    <span class="demo-number">Option 5</span>
+                    <button class="replay-btn" onclick="replay(5)">Replay</button>
+                </div>
+            </div>
+            <div class="demo-content demo-5 animate">
+                <div class="contact-text">
+                    <h2 class="contact-title">Let's create something unforgettable</h2>
+                    <span class="contact-email">joeytroup@gmail.com</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Setup letter stagger for option 3
+        function setupLetterStagger() {
+            const title = "Let's create something unforgettable";
+            const email = "joeytroup@gmail.com";
+
+            const titleEl = document.getElementById('title-3');
+            const emailEl = document.getElementById('email-3');
+
+            // Create letter spans for title
+            let titleDelay = 0.2;
+            titleEl.innerHTML = title.split('').map((char, i) => {
+                if (char === ' ') {
+                    return '<span class="letter space"> </span>';
+                }
+                const delay = titleDelay + (i * 0.03);
+                return `<span class="letter" style="animation-delay: ${delay}s">${char}</span>`;
+            }).join('');
+
+            // Create letter spans for email
+            let emailDelay = titleDelay + (title.length * 0.03) + 0.2;
+            emailEl.innerHTML = email.split('').map((char, i) => {
+                const delay = emailDelay + (i * 0.03);
+                return `<span class="letter" style="animation-delay: ${delay}s">${char}</span>`;
+            }).join('');
+        }
+
+        function replay(num) {
+            const demo = document.querySelector(`.demo-${num}`);
+            demo.classList.remove('animate');
+
+            if (num === 3) {
+                setupLetterStagger();
+            }
+
+            // Force reflow
+            void demo.offsetWidth;
+
+            setTimeout(() => {
+                demo.classList.add('animate');
+            }, 50);
+        }
+
+        // Initialize
+        setupLetterStagger();
+    </script>
+</body>
+</html>

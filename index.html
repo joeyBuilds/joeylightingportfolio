@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Joey Troup — Concert Lighting Programmer</title>
-    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
-    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="images/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512x512.png">
     <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -249,11 +252,17 @@
             text-transform: uppercase;
         }
 
+        .logo-link {
+            cursor: pointer;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
         .nav-logo {
-            height: 4.3em;
+            height: 5.5em;
             width: auto;
             vertical-align: middle;
-            margin-right: 0.4em;
+            margin-right: 0.5em;
             animation: logoSpin 20s linear infinite;
         }
 
@@ -416,21 +425,86 @@
             height: 120%;
             object-fit: cover;
             object-position: center center;
-            opacity: 0;
-            transform: scale(1.15);
-            animation: heroZoom 2.5s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards;
+            opacity: 1;
+            transform: scale(1);
             will-change: transform;
+            animation: subtleGlitch 8s ease-in-out infinite;
         }
 
-        @keyframes heroZoom {
-            from {
-                opacity: 0;
-                transform: scale(1.15) translateY(-5%);
+        @keyframes subtleGlitch {
+            0%, 100% {
+                filter: none;
+                transform: scale(1) translate(0, 0);
             }
-            to {
-                opacity: 0.5;
-                transform: scale(1) translateY(0);
+            2% {
+                filter: none;
+                transform: scale(1) translate(0, 0);
             }
+            2.5% {
+                filter: saturate(1.2) hue-rotate(2deg);
+                transform: scale(1) translate(1px, 0);
+            }
+            3% {
+                filter: saturate(0.9) hue-rotate(-1deg);
+                transform: scale(1) translate(-1px, 0);
+            }
+            3.5% {
+                filter: none;
+                transform: scale(1) translate(0, 0);
+            }
+            50%, 52% {
+                filter: none;
+                transform: scale(1) translate(0, 0);
+            }
+            52.5% {
+                filter: saturate(1.1) brightness(1.02);
+                transform: scale(1) translate(0, 1px);
+            }
+            53% {
+                filter: none;
+                transform: scale(1) translate(0, 0);
+            }
+        }
+
+        /* ============================================
+           HERO SHUTTER REVEAL
+           ============================================ */
+        .hero-shutter-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: row;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .hero-shutter-blade {
+            flex: 1;
+            background: #000;
+            transform: scaleX(1);
+            transform-origin: center;
+        }
+
+        /* Trigger animation after preloader (1.5s) */
+        .shutter-animate .hero-shutter-blade {
+            animation: heroShutterOpen 1.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        /* Organic stagger - center-ish outward with variation */
+        .shutter-animate .hero-shutter-blade:nth-child(6)  { animation-delay: 1.65s; }
+        .shutter-animate .hero-shutter-blade:nth-child(5)  { animation-delay: 1.72s; }
+        .shutter-animate .hero-shutter-blade:nth-child(7)  { animation-delay: 1.81s; }
+        .shutter-animate .hero-shutter-blade:nth-child(4)  { animation-delay: 1.88s; }
+        .shutter-animate .hero-shutter-blade:nth-child(8)  { animation-delay: 2.02s; }
+        .shutter-animate .hero-shutter-blade:nth-child(3)  { animation-delay: 2.11s; }
+        .shutter-animate .hero-shutter-blade:nth-child(9)  { animation-delay: 2.24s; }
+        .shutter-animate .hero-shutter-blade:nth-child(2)  { animation-delay: 2.35s; }
+        .shutter-animate .hero-shutter-blade:nth-child(10) { animation-delay: 2.45s; }
+        .shutter-animate .hero-shutter-blade:nth-child(1)  { animation-delay: 2.58s; }
+
+        @keyframes heroShutterOpen {
+            0% { transform: scaleX(1); }
+            100% { transform: scaleX(0); }
         }
 
         .hero-image::after {
@@ -470,11 +544,11 @@
         }
 
         .hero-title .line:first-child .word {
-            animation-delay: 1.0s;
+            animation-delay: 3.0s;
         }
 
         .hero-title .line:last-child .word {
-            animation-delay: 1.2s;
+            animation-delay: 3.2s;
         }
 
         @keyframes wordReveal {
@@ -506,7 +580,7 @@
             line-height: 1.5;
             opacity: 0;
             transform: translateY(40px);
-            animation: heroSlideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 1.5s forwards;
+            animation: heroSlideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 3.5s forwards;
         }
 
         @keyframes heroSlideUp {
@@ -529,7 +603,7 @@
             flex-direction: column;
             align-items: center;
             opacity: 0;
-            animation: scrollHintFade 0.6s ease 2s forwards;
+            animation: scrollHintFade 0.6s ease 3.2s forwards;
         }
 
         @keyframes scrollHintFade {
@@ -866,7 +940,7 @@
             justify-content: flex-start;
             align-items: center;
             text-align: center;
-            padding: 5rem 2rem 6rem;
+            padding: 3rem 2rem 0;
             position: relative;
             overflow: hidden;
         }
@@ -884,7 +958,7 @@
         }
 
         .contact.visible .contact-bg {
-            opacity: 0.4;
+            opacity: 1;
         }
 
         .contact-content {
@@ -902,7 +976,21 @@
             font-size: clamp(1.8rem, 4vw, 2.5rem);
             font-weight: 600;
             color: #fff;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
+            /* Bold outline + black glow */
+            text-shadow:
+                -2px -2px 0 rgba(0,0,0,0.9),
+                2px -2px 0 rgba(0,0,0,0.9),
+                -2px 2px 0 rgba(0,0,0,0.9),
+                2px 2px 0 rgba(0,0,0,0.9),
+                0 0 10px rgba(0,0,0,1),
+                0 0 20px rgba(0,0,0,1),
+                0 0 40px rgba(0,0,0,0.9),
+                0 0 60px rgba(0,0,0,0.7),
+                0 0 80px rgba(0,0,0,0.5);
+            /* Spotlight reveal initial state */
+            opacity: 0;
+            filter: blur(10px);
         }
 
         .contact-email {
@@ -913,10 +1001,70 @@
             position: relative;
             display: inline-block;
             transition: text-shadow 0.3s ease;
+            /* Bold outline + black glow */
+            text-shadow:
+                -2px -2px 0 rgba(0,0,0,0.9),
+                2px -2px 0 rgba(0,0,0,0.9),
+                -2px 2px 0 rgba(0,0,0,0.9),
+                2px 2px 0 rgba(0,0,0,0.9),
+                0 0 10px rgba(0,0,0,1),
+                0 0 20px rgba(0,0,0,1),
+                0 0 40px rgba(0,0,0,0.9),
+                0 0 60px rgba(0,0,0,0.7),
+                0 0 80px rgba(0,0,0,0.5);
+            /* Spotlight reveal initial state */
+            opacity: 0;
+            filter: blur(10px);
+        }
+
+        /* Spotlight reveal animation */
+        .contact.visible .contact-title {
+            animation: spotlightReveal 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+        }
+
+        .contact.visible .contact-email {
+            animation: spotlightReveal 1s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+        }
+
+        @keyframes spotlightReveal {
+            0% {
+                opacity: 0;
+                filter: blur(10px);
+                text-shadow: 0 0 0 transparent;
+            }
+            50% {
+                text-shadow:
+                    0 0 40px rgba(255,255,255,0.8),
+                    0 0 80px rgba(100,150,255,0.5);
+            }
+            100% {
+                opacity: 1;
+                filter: blur(0);
+                text-shadow:
+                    -2px -2px 0 rgba(0,0,0,0.9),
+                    2px -2px 0 rgba(0,0,0,0.9),
+                    -2px 2px 0 rgba(0,0,0,0.9),
+                    2px 2px 0 rgba(0,0,0,0.9),
+                    0 0 10px rgba(0,0,0,1),
+                    0 0 20px rgba(0,0,0,1),
+                    0 0 40px rgba(0,0,0,0.9),
+                    0 0 60px rgba(0,0,0,0.7),
+                    0 0 80px rgba(0,0,0,0.5);
+            }
         }
 
         .contact-email:hover {
-            text-shadow: 0 0 30px rgba(255,255,255,0.5);
+            text-shadow:
+                -2px -2px 0 rgba(0,0,0,0.9),
+                2px -2px 0 rgba(0,0,0,0.9),
+                -2px 2px 0 rgba(0,0,0,0.9),
+                2px 2px 0 rgba(0,0,0,0.9),
+                0 0 10px rgba(0,0,0,1),
+                0 0 20px rgba(0,0,0,1),
+                0 0 40px rgba(0,0,0,0.9),
+                0 0 60px rgba(0,0,0,0.7),
+                0 0 80px rgba(0,0,0,0.5),
+                0 0 30px rgba(255,255,255,0.5);
         }
 
         .contact-email::after {
@@ -944,6 +1092,9 @@
             opacity: 0;
             transform: translateY(20px);
             transition: all 0.6s ease 0.4s;
+            text-shadow:
+                0 2px 6px rgba(0,0,0,0.8),
+                0 4px 12px rgba(0,0,0,0.6);
         }
 
         .contact.visible .contact-subtext {
@@ -1031,7 +1182,7 @@
             }
 
             .nav-logo {
-                height: 2.8em;
+                height: 3.5em;
             }
 
             .hero {
@@ -1043,7 +1194,7 @@
                 object-position: 65% center;
                 transform: none !important;
                 animation: none !important;
-                opacity: 0.5;
+                opacity: 1;
             }
 
             .intro-section {
@@ -1097,10 +1248,28 @@
                 padding: 4rem 2rem;
             }
 
+            .contact.visible .contact-content {
+                transform: translateY(10px);
+            }
+
             footer {
                 flex-direction: column;
                 gap: 1rem;
                 padding: 2rem;
+            }
+        }
+
+        /* Mid-size tablets */
+        @media (max-width: 1000px) and (min-width: 601px) {
+            .contact.visible .contact-content {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Larger tablets */
+        @media (max-width: 1100px) and (min-width: 1001px) {
+            .contact.visible .contact-content {
+                transform: translateY(-40px);
             }
         }
 
@@ -1196,6 +1365,10 @@
             .contact-email {
                 font-size: 1.2rem;
                 word-break: break-all;
+            }
+
+            .contact.visible .contact-content {
+                transform: translateY(20px);
             }
 
             footer {
@@ -1370,7 +1543,7 @@
     </div>
 
     <nav>
-        <div class="logo"><img src="images/AlchemyCircleRounded.png" alt="Logo" class="nav-logo">Joey Troup</div>
+        <div class="logo"><a href="#" class="logo-link" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;"><img src="images/BetterAlchemyCircle_Rounded.png" alt="Logo" class="nav-logo"></a>Joey Troup</div>
         <ul class="nav-links">
             <li><a href="#work">Work</a></li>
             <li><a href="#about">About</a></li>
@@ -1397,6 +1570,18 @@
         <section class="hero" data-section="hero">
             <div class="hero-image" data-parallax="0.3">
                 <img src="images/joeyprofile.jpg" alt="Joey Troup">
+                <div class="hero-shutter-overlay">
+                    <div class="hero-shutter-blade"></div>
+                    <div class="hero-shutter-blade"></div>
+                    <div class="hero-shutter-blade"></div>
+                    <div class="hero-shutter-blade"></div>
+                    <div class="hero-shutter-blade"></div>
+                    <div class="hero-shutter-blade"></div>
+                    <div class="hero-shutter-blade"></div>
+                    <div class="hero-shutter-blade"></div>
+                    <div class="hero-shutter-blade"></div>
+                    <div class="hero-shutter-blade"></div>
+                </div>
             </div>
             <div class="hero-content">
                 <h1 class="hero-title">
@@ -1598,9 +1783,13 @@
 
     <script>
         // ============================================
-        // PRELOADER
+        // PRELOADER & HERO SHUTTER REVEAL
         // ============================================
         window.addEventListener('load', () => {
+            // Start shutter animation immediately (it has built-in delays)
+            document.body.classList.add('shutter-animate');
+
+            // Hide preloader after 1.5s
             setTimeout(() => {
                 document.getElementById('preloader').classList.add('loaded');
             }, 1500);
