@@ -1279,24 +1279,50 @@
             .tour-image {
                 min-height: 45vh;
                 max-height: 60vh;
+                transform: none;
+                transition: opacity 1s ease;
+            }
+
+            .tour-feature.visible .tour-image {
+                transform: none;
+            }
+
+            .intro-image {
+                transform: none;
+                transition: opacity 1s ease;
+            }
+
+            .intro-section.visible .intro-image {
+                transform: none;
+            }
+
+            .about-image {
+                transform: none;
+                transition: opacity 1s ease 0.2s;
+            }
+
+            .about.visible .about-image {
+                transform: none;
             }
 
             /* Disable Ken Burns and all transform animations on mobile */
+            /* Also set images to visible - let container handle the fade */
             .tour-image img {
                 transform: none !important;
                 animation: none !important;
-                transition: opacity 0.8s ease !important;
+                opacity: 1 !important;
+            }
+
+            .intro-image img {
+                opacity: 1 !important;
+            }
+
+            .about-image img {
+                opacity: 1 !important;
             }
 
             .tour-feature.visible .tour-image img {
                 animation: none !important;
-            }
-
-            /* Ensure fade-in works on mobile */
-            .tour-image img.loaded,
-            .intro-image img.loaded,
-            .about-image img.loaded {
-                opacity: 1 !important;
             }
 
             .section-divider {
@@ -1391,13 +1417,24 @@
             .tour-image {
                 min-height: 35vh;
                 max-height: 50vh;
+                transform: none;
+                transition: opacity 1s ease;
+            }
+
+            .tour-feature.visible .tour-image {
+                transform: none;
             }
 
             .tour-image img {
                 object-position: center;
                 transform: none !important;
                 animation: none !important;
-                transition: opacity 0.8s ease !important;
+                opacity: 1 !important;
+            }
+
+            .intro-image img,
+            .about-image img {
+                opacity: 1 !important;
             }
 
             .about {
